@@ -7,9 +7,9 @@
 **/
 /*******************************************************************************/
 
-CREATE TABLE [Dim].[Product]
+CREATE TABLE [Mcr].[Product]
 (
-	[ProductKEY]					INT				NOT NULL
+	[ProductKEY]					INT				NOT NULL			IDENTITY (1,1)
 	, [ProductID]					INT				NOT NULL	
 	, [ProductDSC]					VARCHAR(255)	NULL
 	, [DivisionCD]					VARCHAR(255)	NULL
@@ -85,12 +85,11 @@ CREATE TABLE [Dim].[Product]
 	, [DmEndDate]					DATETIME		NOT NULL	DEFAULT ('12-31-2399')
 	, [DmActiveFLG]					VARCHAR(255)	NOT NULL	DEFAULT ('Y')
 	, [DmBatchKEY]					INT				NOT NULL	DEFAULT -1
-	
 
-    , CONSTRAINT [PK_Dim_Product_ProductKEY] PRIMARY KEY CLUSTERED ([ProductKEY] ASC)
+    , CONSTRAINT [PK_Mcr_Product_ProductKEY] PRIMARY KEY CLUSTERED ([ProductKEY] ASC)
 );
 
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [UIX_Dim_Product_ProductKEY]
-    ON [Dim].[Product]([ProductKEY] ASC);
+CREATE UNIQUE NONCLUSTERED INDEX [UIX_Mcr_Product_ProductID]
+    ON [Mcr].[Product]([ProductID] ASC);

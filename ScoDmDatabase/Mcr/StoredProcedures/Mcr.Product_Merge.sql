@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [Dim].[Product_Merge]
+﻿CREATE PROCEDURE [Mcr].[Product_Merge]
 
 	@BatchKEY INT
 
@@ -17,13 +17,12 @@ AS
 
 BEGIN TRY
 
-	MERGE INTO Dim.Product tgt
+	MERGE INTO Mcr.Product tgt
 
 	USING ( 
 
 		SELECT 
-		  a.[ProductKEY]	
-		, a.[ProductID]		
+		  a.[ProductID]		
 		, a.[ProductDSC]
 		, a.[DivisionCD]
 		, a.[MaterialGroupCD]
@@ -99,21 +98,20 @@ BEGIN TRY
 		, a.DmActiveFLG
 		, a.DmBatchKEY	
 		FROM
-			Mcr.Product a
+			Stage.Product a
 
 	) src 
 
 	ON ( 
 
-		tgt.ProductKEY = src.ProductKEY
+		tgt.ProductID = src.ProductID
 	)
 
 	WHEN MATCHED THEN 
 
 		UPDATE SET
 
-		  tgt.[ProductKEY]								= src.[ProductKEY]				
-		, tgt.[ProductID]								= src.[ProductID]				
+		  tgt.[ProductID]								= src.[ProductID]				
 		, tgt.[ProductDSC]								= src.[ProductDSC]
 		, tgt.[DivisionCD]								= src.[DivisionCD]
 		, tgt.[MaterialGroupCD]							= src.[MaterialGroupCD]
@@ -193,8 +191,7 @@ BEGIN TRY
 
 		INSERT (
 
-			  [ProductKEY]
-			, [ProductID]					
+			  [ProductID]					
 			, [ProductDSC]					
 			, [DivisionCD]					
 			, [MaterialGroupCD]				
@@ -271,9 +268,8 @@ BEGIN TRY
 			, DmBatchKEY					
 
 		) VALUES (
-		
-			  src.[ProductKEY]
-			, src.[ProductID]				
+
+			  src.[ProductID]				
 			, src.[ProductDSC]
 			, src.[DivisionCD]
 			, src.[MaterialGroupCD]

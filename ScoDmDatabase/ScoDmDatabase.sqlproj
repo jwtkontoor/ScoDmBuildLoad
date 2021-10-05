@@ -84,9 +84,6 @@
     <Folder Include="Parameters\StoredProcedures" />
     <Folder Include="Parameters\Tables" />
     <Folder Include="Parameters\Views" />
-    <Folder Include="Stage\StoredProcedures" />
-    <Folder Include="Stage\Tables" />
-    <Folder Include="Stage\Views" />
     <Folder Include="Work\StoredProcedures" />
     <Folder Include="Work\Tables" />
     <Folder Include="Work\Views" />
@@ -94,5 +91,13 @@
     <Folder Include="Validation\Tables" />
     <Folder Include="Validation\Views" />
     <Folder Include="Security\Schemas" />
+    <Folder Include="Stage\Dimensions" />
+    <Folder Include="Stage\Facts" />
+    <Folder Include="Stage\Dimensions\StoredProcedures" />
+    <Folder Include="Stage\Dimensions\Tables" />
+    <Folder Include="Stage\Dimensions\Views" />
+    <Folder Include="Stage\Facts\StoredProcedures" />
+    <Folder Include="Stage\Facts\Tables" />
+    <Folder Include="Stage\Facts\Views" />
   </ItemGroup>
 </Project>

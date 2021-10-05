@@ -1,16 +1,7 @@
-﻿/*******************************************************************************/
-/**  
-	Customer Dim Table 
-	Created By: JWT					Created On: 7/26/21
-
-
-**/
-/*******************************************************************************/
-
-CREATE TABLE [Dim].[Product]
+﻿CREATE TABLE [Stage].[Product]
 (
-	[ProductKEY]					INT				NOT NULL
-	, [ProductID]					INT				NOT NULL	
+	
+	  [ProductID]					VARCHAR(255)	NOT NULL
 	, [ProductDSC]					VARCHAR(255)	NULL
 	, [DivisionCD]					VARCHAR(255)	NULL
 	, [MaterialGroupCD]				VARCHAR(255)	NULL
@@ -81,16 +72,14 @@ CREATE TABLE [Dim].[Product]
 	, [WashCD]						VARCHAR(255)	NULL
 	, [PpelgCD] 					VARCHAR(255)	NULL
 	, [TieraCD]						INT				NULL
-	, [DmBeginDate]					DATETIME		NOT NULL	DEFAULT ('01-01-1900')
-	, [DmEndDate]					DATETIME		NOT NULL	DEFAULT ('12-31-2399')
+	, [DmBeginDate]					DATETIME		NULL		DEFAULT ('01-01-1900')
+	, [DmEndDate]					DATETIME		NULL		DEFAULT ('12-31-2399')
 	, [DmActiveFLG]					VARCHAR(255)	NOT NULL	DEFAULT ('Y')
 	, [DmBatchKEY]					INT				NOT NULL	DEFAULT -1
+	--, [DmCrcVAL]					VARCHAR (32)	NOT NULL	
 	
 
-    , CONSTRAINT [PK_Dim_Product_ProductKEY] PRIMARY KEY CLUSTERED ([ProductKEY] ASC)
+    , CONSTRAINT [PK_Stage_Product_ProductID] PRIMARY KEY CLUSTERED ([ProductID] ASC)
 );
 
 GO
-
-CREATE UNIQUE NONCLUSTERED INDEX [UIX_Dim_Product_ProductKEY]
-    ON [Dim].[Product]([ProductKEY] ASC);
