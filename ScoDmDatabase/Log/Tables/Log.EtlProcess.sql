@@ -2,8 +2,8 @@
 (
 	[EtlProcessKEY]				INT				NOT NULL		IDENTITY (1,1)
 	, [BatchKEY]				INT				NOT NULL
-	, [ProcessStart]			DATETIME		NOT NULL		DEFAULT (GETDATE()) 
-	, [ProcessEndDate]			DATETIME		NULL
+	, [ProcessStartDT]			DATETIME		NOT NULL		DEFAULT (GETDATE()) 
+	, [ProcessEndDT]			DATETIME		NULL
 	, [RowsInserted]			INT				NULL
 	, [RowsUpdated]				INT				NULL 
 	, [ProcessNM]				VARCHAR(255)	NULL 

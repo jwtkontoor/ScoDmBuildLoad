@@ -24,7 +24,7 @@ CREATE TABLE [Fact].[Inventory]
 	, [DmCreateDate]		DATETIME			NOT NULL		DEFAULT(GETDATE())
 	, [DmModifiedDate]		DATETIME			NOT NULL		DEFAULT(GETDATE()) 
 
-	--Table Constraints PK First then Foerign Keys
+	--Table Constraints PK First then Foerign Keys 
     , CONSTRAINT [PK_Fact_Inventory_InventoryKEY] PRIMARY KEY CLUSTERED ([InventoryKEY] ASC) 
 )
 

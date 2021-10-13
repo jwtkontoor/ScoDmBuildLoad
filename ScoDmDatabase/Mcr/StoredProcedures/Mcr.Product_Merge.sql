@@ -93,8 +93,8 @@ BEGIN TRY
 		, a.[WashCD]
 		, a.[PpelgCD]  
 		, a.[TieraCD]		
-		, a.DmBeginDT
-		, a.DmEndDT
+		--, a.DmBeginDT
+		--, a.DmEndDT
 		, a.DmActiveFLG
 		, a.DmBatchKEY	
 		FROM
@@ -182,8 +182,8 @@ BEGIN TRY
 		, tgt.[WashCD]									= src.[WashCD]
 		, tgt.[PpelgCD]  								= src.[PpelgCD]  
 		, tgt.[TieraCD]									= src.[TieraCD]		
-		, tgt.DmBeginDT									= src.DmBeginDT
-		, tgt.DmEndDT									= src.DmEndDT
+		--, tgt.DmBeginDT									= src.DmBeginDT
+		--, tgt.DmEndDT									= src.DmEndDT
 		, tgt.DmActiveFLG								= src.DmActiveFLG
 		, tgt.DmBatchKEY								= src.DmBatchKEY	
 
@@ -262,8 +262,8 @@ BEGIN TRY
 			, [WashCD]						
 			, [PpelgCD]  					
 			, [TieraCD]						
-			, DmBeginDT						
-			, DmEndDT						
+			--, DmBeginDT						
+			--, DmEndDT						
 			, DmActiveFLG					
 			, DmBatchKEY					
 
@@ -340,8 +340,8 @@ BEGIN TRY
 			, src.[WashCD]
 			, src.[PpelgCD]  
 			, src.[TieraCD]		
-			, src.DmBeginDT
-			, src.DmEndDT
+			--, src.DmBeginDT
+			--, src.DmEndDT
 			, src.DmActiveFLG
 			, src.DmBatchKEY	
 		);
