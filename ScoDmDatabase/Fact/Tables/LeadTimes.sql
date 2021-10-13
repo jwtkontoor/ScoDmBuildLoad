@@ -9,15 +9,18 @@
 **/
 /*******************************************************************************/
 
-CREATE TABLE [Fact].[Inventory]
+CREATE TABLE [Fact].[LeadTimes]
 (
-	--Surrogate (Primary) Key
-	[InventoryKEY]			INT			NOT NULL
 	
-	--ForignKeys
-	, [CustomerKEY] 		INT			NOT NULL		
+	--Surrogate (Primary) Key
+	  [LeadTimesKEY]                   INT                 NOT NULL 
 
-	--Data Columns
+	--ForignKeys
+    , [RetailStoreKEY]                 INT                 NOT NULL  
+
+	--Measures
+    , [LeadTimeNUM]                      INT                 NULL
+
 
 	-- Data Mart Logging
 	, [DmBatchKEY]			INT					NOT NULL		DEFAULT(-1)
@@ -25,7 +28,5 @@ CREATE TABLE [Fact].[Inventory]
 	, [DmModifiedDate]		DATETIME			NOT NULL		DEFAULT(GETDATE()) 
 
 	--Table Constraints PK First then Foerign Keys
-    , CONSTRAINT [PK_Fact_Inventory_InventoryKEY] PRIMARY KEY CLUSTERED ([InventoryKEY] ASC) 
+    , CONSTRAINT [PK_Fact_LeadTimes_LeadTimesKEY] PRIMARY KEY CLUSTERED ([LeadTimesKEY] ASC) 
 )
-
---Additional Indexes

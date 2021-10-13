@@ -100,4 +100,43 @@
     <Folder Include="Stage\Facts\Tables" />
     <Folder Include="Stage\Facts\Views" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Dim\Tables\Dim.Calendar.sql" />
+    <Build Include="Dim\Tables\Dim.Customer.sql" />
+    <Build Include="Dim\Tables\Dim.Location.sql" />
+    <Build Include="Dim\Tables\Dim.Product.sql" />
+    <Build Include="Dim\StoredProcedures\Dim.Product_Merge.sql" />
+    <Build Include="Fact\StoredProcedures\Fact.Inventory_Merge.sql" />
+    <Build Include="Fact\Tables\Fact.Inventory.sql" />
+    <Build Include="Fact\Tables\LeadTimes.sql" />
+    <Build Include="Security\Schemas\Dim.sql" />
+    <Build Include="Security\Schemas\Fact.sql" />
+    <Build Include="Security\Schemas\Log.sql" />
+    <Build Include="Security\Schemas\Mcr.sql" />
+    <Build Include="Security\Schemas\Setup.sql" />
+    <Build Include="Security\Schemas\Stage.sql" />
+    <Build Include="Security\Schemas\Validation.sql" />
+    <Build Include="Security\Schemas\Work.sql" />
+    <Build Include="Log\StoredProcedures\Log.EtlBatch_Create.sql" />
+    <Build Include="Log\StoredProcedures\Log.EtlBatch_Update.sql" />
+    <Build Include="Log\StoredProcedures\Log.EtlError_Create.sql" />
+    <Build Include="Log\StoredProcedures\Log.EtlProcess_Create.sql" />
+    <Build Include="Log\StoredProcedures\Log.GetLastSuccessfulRunDate.sql" />
+    <Build Include="Log\Tables\Log.EtlBatch.sql" />
+    <Build Include="Log\Tables\Log.EtlError.sql" />
+    <Build Include="Log\Tables\Log.EtlProcess.sql" />
+    <Build Include="Log\Views\Log.EtlBatch_AllResultSummary.sql" />
+    <Build Include="Log\Views\Log.EtlBatch_ErrorLog.sql" />
+    <Build Include="Log\Views\Log.EtlBatch_LastResultDetail.sql" />
+    <Build Include="Mcr\StoredProcedures\Mcr.Product_Merge.sql" />
+    <Build Include="Mcr\Tables\Mcr.Customer.sql" />
+    <Build Include="Mcr\Tables\Mcr.Product.sql" />
+    <Build Include="Setup\StoredProcedures\Setup.DatesDimension_Build.sql" />
+    <Build Include="Stage\Dimensions\StoredProcedures\Stage.Product_Insert.sql" />
+    <Build Include="Stage\Dimensions\Tables\Stage.Product.sql" />
+    <Build Include="Work\Tables\Work.Inventory.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="ScoDmDatabase.refactorlog" />
+  </ItemGroup>
 </Project>
