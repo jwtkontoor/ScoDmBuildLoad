@@ -1,7 +1,11 @@
 ﻿CREATE TABLE [Mcr].[CustomerStore]
 (
+	--Surrogate Key
 	[CustomerStoreKEY]			INT					NOT NULL			IDENTITY (1,1) 
 	
+	--Business Key(s)
+
+
 	--Information Columns
 	, [CustomerNM]				VARCHAR(50)			NULL				
 	, [CustomerId]				INT					NOT NULL  

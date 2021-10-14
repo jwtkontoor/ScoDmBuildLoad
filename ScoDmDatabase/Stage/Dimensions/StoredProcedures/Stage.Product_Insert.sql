@@ -94,8 +94,10 @@ BEGIN TRY
 			, [ZZPPELG]								AS [PpelgCD] --Name needs Checking
 			, [ZZTIERA]								AS [TieraCD]	
 			, GETDATE()								AS [DmStartDate]
+			, NULL									AS [DmEndDate]		
+			, 1										AS [DmActiveFLG]	
 			, @BatchKEY								AS [DmBatchKEY]		
-		FROM [WW_DB_LOGILITY_PRD].[dbo].[SAP_MD_MARA] 
+		FROM [DB_WW_LOGILITY_PREPROD].[dbo].[SAP_MD_MARA] 
 	)
 
 	INSERT INTO Stage.Product ( 
@@ -176,11 +178,8 @@ BEGIN TRY
 		, [DmActiveFLG]		
 		, [DmBatchKEY]		
 		--, [DmCrcVAL]		
-
 	) 
 	SELECT 
-	
-		
 		a.[ProductID]		
 		, a.[ProductDSC]
 		, a.[DivisionCD]
@@ -252,7 +251,7 @@ BEGIN TRY
 		, a.[WashCD]
 		, a.[PpelgCD]  
 		, a.[TieraCD]			
-		, a.[DmBeginDate]		
+		, a.[DmStartDate]		
 		, a.[DmEndDate]		
 		, a.[DmActiveFLG]		
 		, a.[DmBatchKEY]	

@@ -64,6 +64,3 @@ BEGIN
  SET @LoopDate = DateAdd(d, 1, @LoopDate)
 END
 
--- now we have inserted the data we can check how it appears in our table
-SELECT TOP 100 * FROM Dates
-RETURN 0

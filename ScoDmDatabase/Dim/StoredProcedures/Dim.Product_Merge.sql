@@ -94,8 +94,8 @@ BEGIN TRY
 		, a.[WashCD]
 		, a.[PpelgCD]  
 		, a.[TieraCD]		
-		, a.DmBeginDT
-		, a.DmEndDT
+		--, a.DmBeginDT
+		--, a.DmEndDT
 		, a.DmActiveFLG
 		, a.DmBatchKEY	
 		FROM

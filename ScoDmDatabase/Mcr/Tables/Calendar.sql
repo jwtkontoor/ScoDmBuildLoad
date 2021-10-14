@@ -1,6 +1,10 @@
-﻿CREATE TABLE [Dim].[Calendar]
+﻿CREATE TABLE [Mcr].[Calendar] 
 (
-	[DateKEY]						INT				NOT NULL		
+    --Surrogate Key
+	[DateKEY]		INT				NOT NULL		IDENTITY (1,1)
+
+    --business Key(s)
+    , [DateID]                      INT             NOT NULL
     , [CalendarDT]					DATETIME		NOT NULL 
     , [CalendarDateDSC]				VARCHAR(255)	NOT NULL 
 	, [CalendarDayOfWeekID]  		INT				NOT NULL		DEFAULT -1 
@@ -22,11 +26,7 @@
 	, [LastWeekFLG]					VARCHAR(255)	NOT NULL		DEFAULT ('N') 
 
 
-    , CONSTRAINT [PK_Dim_Calendar_DateKEY] PRIMARY KEY CLUSTERED ([DateKEY] ASC)
+    , CONSTRAINT [PK_MCR_Calendar_DateKEY] PRIMARY KEY CLUSTERED ([DateKEY] ASC)
 );
 
 GO
-
-
-CREATE UNIQUE NONCLUSTERED INDEX [UIX_Dim_Calendar_CalendarDT]
-    ON [Dim].[Calendar]([CalendarDT] ASC);

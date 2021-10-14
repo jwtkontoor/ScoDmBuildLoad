@@ -137,6 +137,7 @@
     <Build Include="Work\Tables\Work.Inventory.sql" />
     <Build Include="Stage\Dimensions\Tables\Customer.sql" />
     <Build Include="Fact\Tables\Shipment.sql" />
+    <Build Include="Mcr\Tables\Calendar.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ScoDmDatabase.refactorlog" />
