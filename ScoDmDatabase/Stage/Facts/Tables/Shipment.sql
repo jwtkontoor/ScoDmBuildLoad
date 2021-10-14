@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Stage].[Customer]
+﻿CREATE TABLE [Stage].[Shipment]
 (
 	[Id] INT NOT NULL PRIMARY KEY
 )

@@ -13,7 +13,7 @@ CREATE TABLE [Dim].[CustomerStore]
 (
     
 	--Surrogate (Primary) Key
-	[CustomerKEY]			INT					NOT NULL		
+	[CustomerStoreKEY]			INT					NOT NULL		
 
     --Descriptive fields
     , [KeyAccountCD]        VARCHAR(50)         NULL
@@ -30,7 +30,7 @@ CREATE TABLE [Dim].[CustomerStore]
 	, [DmModifiedDate]		DATETIME			NOT NULL		DEFAULT(GETDATE())
     
 	--Table Constraints PK First then Foerign Keys 
-	, CONSTRAINT [PK_Dim_Customer_CustomerKEY] PRIMARY KEY CLUSTERED ([CustomerKEY] ASC) 
+	, CONSTRAINT [PK_Dim_CustomerStore_CustomerStoreKEY] PRIMARY KEY CLUSTERED ([CustomerStoreKEY] ASC) 
 )
 
 GO
@@ -39,15 +39,15 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'Dim',
     @level1type = N'TABLE',
-    @level1name = N'Customer',
+    @level1name = N'CustomerStore',
     @level2type = N'COLUMN',
     @level2name = N'DmActiveFlag'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Mart generated Customer Surrogate Key',
+    @value = N'Mart generated CustomerStore Surrogate Key',
     @level0type = N'SCHEMA',
     @level0name = N'Dim',
     @level1type = N'TABLE',
-    @level1name = N'Customer',
+    @level1name = N'CustomerStore',
     @level2type = N'COLUMN',
-    @level2name = N'CustomerKEY'
+    @level2name = N'CustomerStoreKEY'

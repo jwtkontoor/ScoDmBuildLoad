@@ -135,9 +135,12 @@
     <Build Include="Stage\Dimensions\StoredProcedures\Stage.Product_Insert.sql" />
     <Build Include="Stage\Dimensions\Tables\Stage.Product.sql" />
     <Build Include="Work\Tables\Work.Inventory.sql" />
-    <Build Include="Stage\Dimensions\Tables\Customer.sql" />
+    <Build Include="Stage\Dimensions\Tables\Stage.CustomerStore.sql" />
     <Build Include="Fact\Tables\Shipment.sql" />
     <Build Include="Mcr\Tables\Calendar.sql" />
+    <Build Include="Stage\Dimensions\StoredProcedures\Stage.CustomerStore_Insert.sql" />
+    <Build Include="Stage\Facts\Tables\Shipment.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Shipment_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ScoDmDatabase.refactorlog" />

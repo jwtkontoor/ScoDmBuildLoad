@@ -14,4 +14,95 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Customer" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="26c3ae41-0de5-47d9-ba8e-a14c04b21b8d" ChangeDateTime="10/14/2021 15:46:05">
+    <Property Name="ElementName" Value="[Dim].[CustomerStore].[CustomerKEY]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Dim].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CustomerStoreKEY" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ca018d5c-c9d6-48fa-bd8b-de8565135918" ChangeDateTime="10/14/2021 19:55:35">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[KEYACCOUNT]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="KeyAccount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dcd72c67-dddb-4d77-817d-dfb3e26540a3" ChangeDateTime="10/14/2021 19:55:45">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[PLANTCATEGORY]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PlantCategory" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="044d719b-7574-4a2b-8fd9-3c0f378c16e7" ChangeDateTime="10/14/2021 19:55:53">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[SITE_DESCRIPTION]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SiteDescription" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5b224186-8a5d-4b1e-920c-7170d66473e1" ChangeDateTime="10/14/2021 19:55:58">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[REGION]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Region" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="184af5f6-c80e-4a3f-a7b5-b7362cdeac6f" ChangeDateTime="10/14/2021 19:56:04">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[COUNTRY]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Country" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8b6a064a-986d-446c-b14f-ee9edf27e129" ChangeDateTime="10/14/2021 19:56:08">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[CITY]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="City" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f7053ac7-9a02-4f8c-a7e4-210a014b1bbe" ChangeDateTime="10/14/2021 19:56:21">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[DISTRICT]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="District" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7a1dceee-1437-4468-8a6d-66fe41ee5873" ChangeDateTime="10/14/2021 19:56:31">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[OPENDATS]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="OpeningDTS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c337b434-47ef-4c0e-a6bd-1d335a4ff869" ChangeDateTime="10/14/2021 19:56:39">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[CLOSEDATS]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClosedOnDTS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="69ca2825-0912-4aaa-8ab5-ad9f47e76fd5" ChangeDateTime="10/14/2021 19:56:49">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[OpeningDTS]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="OpenedOnDTS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b6964f4e-ebb1-4d38-b1de-09eaa4b29fb8" ChangeDateTime="10/14/2021 19:56:57">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[SELLAREA]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SellArea" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d1dfbd0f-30c7-4f75-999b-acce082fd4d4" ChangeDateTime="10/14/2021 19:57:08">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[SELLAREA_UNIT]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SellAreaUnit" />
+  </Operation>
 </Operations>
