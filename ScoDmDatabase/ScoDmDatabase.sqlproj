@@ -102,7 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Dim\Tables\Dim.Calendar.sql" />
-    <Build Include="Dim\Tables\Dim.Customer.sql" />
+    <Build Include="Dim\Tables\Dim.CustomerStore.sql" />
     <Build Include="Dim\Tables\Dim.Location.sql" />
     <Build Include="Dim\Tables\Dim.Product.sql" />
     <Build Include="Dim\StoredProcedures\Dim.Product_Merge.sql" />

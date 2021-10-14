@@ -1,6 +1,6 @@
 ﻿/*******************************************************************************/
 /**  
-	Customer Dim Table 
+	CustomerStore Dim Table 
 	Created By: JWT					Created On: 7/26/21
 
 	Used for loading the Inventory Fact table.  See Inventory Fact for details.
@@ -9,7 +9,7 @@
 /*******************************************************************************/
 
 
-CREATE TABLE [Dim].[Customer]
+CREATE TABLE [Dim].[CustomerStore]
 (
     
 	--Surrogate (Primary) Key
