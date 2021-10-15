@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [Stage].[CustomerStore_Insert]
+﻿CREATE PROCEDURE [Stage].[Shipment_Insert]
 
 	@BatchKEY INT
 
@@ -17,78 +17,23 @@ AS
 
 BEGIN TRY
 	
-	TRUNCATE TABLE Stage.CustomerStore; 
+	TRUNCATE TABLE Stage.Shipment; 
 
-WITH SapStores AS 
+WITH SapShipments AS 
 (
-	--SELECT 
- --       rs.[RETAILSITE]
- --     , ka.[KEY_ACCOUNT]
- --     , rs.[PLANTCATEGORY]
- --     , rs.[PLANTTYPE]
- --     , rs.[SITE_DESCRIPTION]
- --     , rs.[REGION]
- --     , rs.[COUNTRY]
- --     , rs.[CITY]
- --     , rs.[DISTRICT]
- --     , rs.[OPENDATS]
- --     , rs.[CLOSEDATS]
- --     , rs.[SELLAREA]
- --     , rs.[SELLAREA_UNIT]
- -- FROM [dbo].[SAP_MD_RETAILSITE]  rs
- -- INNER JOIN [dbo].[LOG_RO_KEY_ACCOUNT_DB_INSTANCE] ka
- -- ON rs.[DISTRICT] = ka.REGION
- -- WHERE 1 = 1 
- -- AND [PLANTCATEGORY] = 'A'
-
- -- UNION 
-
   SELECT 
-    [RETAILSITE]
-      ,[KEYACCOUNT]
-      ,[PLANTCATEGORY]
-      ,[SITE_DESCRIPTION]
-      ,[REGION]
-      ,[COUNTRY]
-      ,[CITY]
-      ,[DISTRICT]
-      ,[OPENDATS]
-      ,[CLOSEDATS]
-      ,[SELLAREA]
-      ,[SELLAREA_UNIT]
-  FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED]
+    1						AS [ShipmentId]
+  --FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED]
 )
 	
-INSERT INTO Stage.CustomerStore ( 
+INSERT INTO Stage.Shipment ( 
 
-    [RetailSite]   
-      ,[KeyAccount]                  
-      ,[PlantCategory]              
-      ,[SiteDescription]            
-      ,[Region]                     
-      ,[Country]                    
-      ,[City]                       
-      ,[District]                   
-      ,[OpenedOnDTS]                
-      ,[ClosedOnDTS]                
-      ,[SellArea]                   
-      ,[SellAreaUnit]               
+    [ShipmentId]                  
 
 )
 SELECT 
-    a.[RETAILSITE]
-    , a.[KEYACCOUNT]
-    , a.[PLANTCATEGORY]
-    , a.[SITE_DESCRIPTION]
-    , a.[REGION]
-    , a.[COUNTRY]
-    , a.[CITY]
-    , a.[DISTRICT]
-    , a.[OPENDATS]
-    , a.[CLOSEDATS]
-    , a.[SELLAREA]
-    , a.[SELLAREA_UNIT]
-FROM SapStores a ;
+    a.[ShipmentId]
+FROM SapShipments a ;
 
 --=================================================================================================
 
