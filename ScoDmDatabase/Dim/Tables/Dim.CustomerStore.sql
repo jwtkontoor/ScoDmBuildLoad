@@ -37,9 +37,9 @@ CREATE TABLE [Dim].[CustomerStore]
 	, [StoreNM]						VARCHAR(50)			NULL	
 
     --Logging Fields
-	, [DmActiveFlag]		VARCHAR (255)		NOT NULL		DEFAULT('Y')
-	, [DmBeginDate]			DATETIME			NOT NULL		DEFAULT('01/01/1900')
-	, [DmEndDate]			DATETIME			NOT NULL		DEFAULT('12/31/2299')
+	, [DmActiveFLG]			VARCHAR (255)		NOT NULL		DEFAULT('Y')
+	, [DmBeginDTS]			DATETIME			NOT NULL		DEFAULT('01/01/1900')
+	, [DmEndDTS]			DATETIME			NOT NULL		DEFAULT('12/31/2299')
 	, [DmBatchKEY]			INT					NOT NULL		DEFAULT(-1)
 
     --Update And Change Fields
@@ -58,7 +58,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1type = N'TABLE',
     @level1name = N'CustomerStore',
     @level2type = N'COLUMN',
-    @level2name = N'DmActiveFlag'
+    @level2name = N'DmActiveFLG'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Mart generated CustomerStore Surrogate Key',
