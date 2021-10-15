@@ -108,7 +108,6 @@
     <Build Include="Dim\StoredProcedures\Dim.Product_Merge.sql" />
     <Build Include="Fact\StoredProcedures\Fact.Inventory_Merge.sql" />
     <Build Include="Fact\Tables\Fact.Inventory.sql" />
-    <Build Include="Fact\Tables\LeadTimes.sql" />
     <Build Include="Security\Schemas\Dim.sql" />
     <Build Include="Security\Schemas\Fact.sql" />
     <Build Include="Security\Schemas\Log.sql" />
@@ -136,11 +135,18 @@
     <Build Include="Stage\Dimensions\Tables\Stage.Product.sql" />
     <Build Include="Work\Tables\Work.Inventory.sql" />
     <Build Include="Stage\Dimensions\Tables\Stage.CustomerStore.sql" />
-    <Build Include="Fact\Tables\Shipment.sql" />
-    <Build Include="Mcr\Tables\Calendar.sql" />
+    <Build Include="Fact\Tables\Fact.Shipment.sql" />
+    <Build Include="Mcr\Tables\Mcr.Calendar.sql" />
     <Build Include="Stage\Dimensions\StoredProcedures\Stage.CustomerStore_Insert.sql" />
-    <Build Include="Stage\Facts\Tables\Shipment.sql" />
-    <Build Include="Stage\Facts\StoredProcedures\Shipment_Insert.sql" />
+    <Build Include="Stage\Facts\Tables\Stage.Shipment.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.Shipment_Insert.sql" />
+    <Build Include="Work\Tables\Work.Shipment.sql" />
+    <Build Include="Fact\StoredProcedures\Fact.Shipment_Insert.sql" />
+    <Build Include="Stage\Facts\Tables\Stage.Inventory.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.Inventory_Insert.sql" />
+    <Build Include="Mcr\StoredProcedures\Mcr.CustomerStore.sql" />
+    <Build Include="Work\StoredProcedures\Work.Inventory_Merge.sql" />
+    <Build Include="Work\StoredProcedures\Work.Shipment_Merge.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ScoDmDatabase.refactorlog" />

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [Stage].[Shipment_Insert]
+﻿CREATE PROCEDURE [Stage].[Inventory_Insert]
 	@param1 int = 0,
 	@param2 int
 AS
