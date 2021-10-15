@@ -6,7 +6,6 @@
 	--Business Key(s) 
 	, [RetailSiteID]				VARCHAR(50)			NULL	
 
-
 	--Information Columns - Keep in aplha order
 	, [City]               			VARCHAR(50)			NULL	
 	, [ClosedOnDTS]					DATETIME			NULL
@@ -23,7 +22,6 @@
 	, [SellAreaUnit]				VARCHAR(50)			NULL  
 	, [StoreId]						INT					NOT NULL 
 	, [StoreNM]						VARCHAR(50)			NULL	
-	
 	
 	, CONSTRAINT [PK_Mcr_CustomerStore_CustomerStoreKEY] PRIMARY KEY CLUSTERED (CustomerStoreKEY ASC)
 );

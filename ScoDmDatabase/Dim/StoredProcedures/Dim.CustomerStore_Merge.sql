@@ -27,19 +27,18 @@ BEGIN TRY
 			, a.[CustomerId]
 			, a.[KeyAccountCD]                  
 			, a.[PlantCategoryCD]              
-			, a.[SiteDescriptionCD]            
+			, a.[SiteDESC]            
 			, a.[Region]                     
 			, a.[Country]                    
 			, a.[City]                       
 			, a.[District]                   
 			, a.[OpenedOnDTS]                
 			, a.[ClosedOnDTS]                
-			, a.[SellArea]                   
+			, a.[SellAreaCD]                   
 			, a.[SellAreaUnit]        
 			--, a.DmBeginDT
 			--, a.DmEndDT
-			, a.DmActiveFLG
-			, a.DmBatchKEY	
+			, @BatchKey  AS DmBatchKEY	
 		FROM
 			Mcr.CustomerStore a
 
@@ -57,7 +56,7 @@ BEGIN TRY
 		  tgt.[RetailSiteID]   						= src.[RetailSiteID]   
 		, tgt.[KeyAccountCD]                  		= src.[KeyAccountCD]                  
 		, tgt.[PlantCategoryCD]              		= src.[PlantCategoryCD]              
-		, tgt.[SiteDescriptionCD]            		= src.[SiteDescriptionCD]            
+		, tgt.[SiteDESC]            				= src.[SiteDESC]            
 		, tgt.[Region]                     			= src.[Region]                     
 		, tgt.[Country]                    			= src.[Country]                    
 		, tgt.[City]                       			= src.[City]                       
