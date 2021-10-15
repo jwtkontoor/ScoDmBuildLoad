@@ -17,7 +17,17 @@ CREATE TABLE [Dim].[CustomerStore]
 
     --Descriptive fields
     , [KeyAccountCD]        VARCHAR(50)         NULL
-    , [RetailStoreCD]       VARCHAR(50)         NULL
+    , [RetailStoreID]       VARCHAR(50)         NULL              
+    , [PlantCategoryCD]     VARCHAR(50)         NULL            
+    , [SiteDESC]            VARCHAR(50)         NULL        
+    , [RegionCD]            VARCHAR(50)         NULL        
+    , [Country]             VARCHAR(50)         NULL        
+    , [City]                VARCHAR(50)         NULL        
+    , [District]            VARCHAR(50)         NULL        
+    , [OpenedOnDTS]         DATETIME            NULL        
+    , [ClosedOnDTS]         DATETIME            NULL        
+    , [SellArea]            VARCHAR(50)         NULL                  
+    , [SellAreaUnit]        VARCHAR(50)         NULL   
 
     --Logging Fields
 	, [DmActiveFlag]		VARCHAR (255)		NOT NULL		DEFAULT('Y')
