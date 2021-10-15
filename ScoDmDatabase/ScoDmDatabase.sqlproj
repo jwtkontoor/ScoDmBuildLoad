@@ -141,7 +141,7 @@
     <Build Include="Stage\Facts\Tables\Stage.Shipment.sql" />
     <Build Include="Stage\Facts\StoredProcedures\Stage.Shipment_Insert.sql" />
     <Build Include="Work\Tables\Work.Shipment.sql" />
-    <Build Include="Fact\StoredProcedures\Fact.Shipment_Insert.sql" />
+    <Build Include="Fact\StoredProcedures\Fact.Shipment_Merge.sql" />
     <Build Include="Stage\Facts\Tables\Stage.Inventory.sql" />
     <Build Include="Stage\Facts\StoredProcedures\Stage.Inventory_Insert.sql" />
     <Build Include="Mcr\StoredProcedures\Mcr.CustomerStore.sql" />
