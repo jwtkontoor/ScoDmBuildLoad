@@ -18,7 +18,6 @@ CREATE TABLE [Dim].[CustomerStore]
 	--Business Key(s) 
 	, [RetailSiteID]				VARCHAR(50)			NULL	
 
-
 	--Information Columns - Keep in aplha order
 	, [City]               			VARCHAR(50)			NULL	
 	, [ClosedOnDTS]					DATETIME			NULL
@@ -29,12 +28,18 @@ CREATE TABLE [Dim].[CustomerStore]
 	, [KeyAccountCD]				VARCHAR(50)			NOT NULL 
 	, [OpenedOnDTS]					DATETIME			NULL
 	, [PlantCategoryCD]				VARCHAR(50)			NOT NULL
-	, [Region]  					VARCHAR(50)			NULL
-	, [SiteDESC]					VARCHAR(255)		NULL      
+      , [PlantTypeCD]                VARCHAR(40)             NULL 
+	, [Region]  					VARCHAR(50)			NULL   
 	, [SellAreaCD]  				VARCHAR(50)			NULL          	
 	, [SellAreaUnit]				VARCHAR(50)			NULL  
+    , [ShipToCustomerID]		    VARCHAR(40)         NULL 
+    , [ShipToDESC]					VARCHAR(40)			NULL 
+	, [SiteDESC]					VARCHAR(255)		NULL    
+	  , [SoldToCustomerID]          VARCHAR(40)             NULL 
+	  , [SoldToDESC]                VARCHAR(40)             NULL
 	, [StoreId]						INT					NOT NULL 
-	, [StoreNM]						VARCHAR(50)			NULL	
+	, [StoreNM]						VARCHAR(50)			NULL		
+
 
     --Logging Fields
 	, [DmActiveFLG]			VARCHAR (255)		NOT NULL		DEFAULT('Y')
@@ -43,8 +48,8 @@ CREATE TABLE [Dim].[CustomerStore]
 	, [DmBatchKEY]			INT					NOT NULL		DEFAULT(-1)
 
     --Update And Change Fields
-	, [DmCreateDate]		DATETIME			NOT NULL		DEFAULT(GETDATE())
-	, [DmModifiedDate]		DATETIME			NOT NULL		DEFAULT(GETDATE())
+	, [DmCreateDTS]		DATETIME			NOT NULL		DEFAULT(GETDATE())
+	, [DmModifiedDTS]		DATETIME			NOT NULL		DEFAULT(GETDATE())
     
 	--Table Constraints PK First then Foerign Keys 
 	, CONSTRAINT [PK_Dim_CustomerStore_CustomerStoreKEY] PRIMARY KEY CLUSTERED ([CustomerStoreKEY] ASC) 

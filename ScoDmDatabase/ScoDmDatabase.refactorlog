@@ -105,4 +105,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="SellAreaUnit" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="50080f99-1faf-44a2-b731-26f4fca366f9" ChangeDateTime="10/18/2021 20:49:14">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[PlantCategory]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PlantCategoryCD" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bc5050f8-f746-4c62-b783-fd64228816bf" ChangeDateTime="10/18/2021 20:49:43">
+    <Property Name="ElementName" Value="[Stage].[CustomerStore].[SellArea]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Stage].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SellAreaCD" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="23b120d1-02d5-4576-b389-9f907bab37c3" ChangeDateTime="10/18/2021 21:08:37">
+    <Property Name="ElementName" Value="[Dim].[CustomerStore].[DmCreateDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Dim].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DmCreateDTS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2d1640f7-c108-407f-80c0-a37964803a57" ChangeDateTime="10/18/2021 21:08:45">
+    <Property Name="ElementName" Value="[Dim].[CustomerStore].[DmModifiedDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Dim].[CustomerStore]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DmModifiedDTS" />
+  </Operation>
 </Operations>

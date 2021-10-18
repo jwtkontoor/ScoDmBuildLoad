@@ -24,8 +24,12 @@ BEGIN TRY
 		SELECT 
 			  a.[CustomerStoreKEY]	
 			, a.[RetailSiteID]  
-			, a.[CustomerId]
-			, a.[KeyAccountCD]                  
+			, a.[KeyAccountCD]   
+			, a.[SoldToCustomerID] 
+			, a.[SoldToDESC]
+			, a.[ShipToCustomerID]	
+			, a.[ShipToDESC]
+			, a.[PlantTypeCD]
 			, a.[PlantCategoryCD]              
 			, a.[SiteDESC]            
 			, a.[Region]                     
@@ -35,11 +39,13 @@ BEGIN TRY
 			, a.[OpenedOnDTS]                
 			, a.[ClosedOnDTS]                
 			, a.[SellAreaCD]                   
-			, a.[SellAreaUnit]        
+			, a.[SellAreaUnit]      
+			, @BatchKEY				AS DmBatchKEY
 			, GETDATE()				AS DmBeginDTS
 			, GETDATE()				AS DmEndDTS
-			, 1						AS DmActiveKEY
-			, @BatchKey				AS DmBatchKEY	
+			, GETDATE()				AS DmModifiedDTS
+			, GETDATE()				AS DmCreateDTS
+			, 1						AS DmActiveKEY	
 		FROM
 			Mcr.CustomerStore a
 
@@ -55,7 +61,11 @@ BEGIN TRY
 		UPDATE SET
 
 		  tgt.[RetailSiteID]   						= src.[RetailSiteID]   
-		, tgt.[KeyAccountCD]                  		= src.[KeyAccountCD]                  
+		, tgt.[KeyAccountCD]                  		= src.[KeyAccountCD]   
+		, tgt.[SoldToCustomerID]					= src.[SoldToCustomerID] 
+		, tgt.[SoldToDESC]							= src.[SoldToDESC]
+		, tgt.[ShipToCustomerID]					= src.[ShipToCustomerID]	
+		, tgt.[ShipToDESC]               			= src.[ShipToDESC]           
 		, tgt.[PlantCategoryCD]              		= src.[PlantCategoryCD]              
 		, tgt.[SiteDESC]            				= src.[SiteDESC]            
 		, tgt.[Region]                     			= src.[Region]                     
@@ -66,7 +76,8 @@ BEGIN TRY
 		, tgt.[ClosedOnDTS]                			= src.[ClosedOnDTS]                
 		, tgt.[SellAreaCD]                   		= src.[SellAreaCD]                   
 		, tgt.[SellAreaUnit]        				= src.[SellAreaUnit]  
-		, tgt.DmBatchKEY							= src.DmBatchKEY	
+		, tgt.DmBatchKEY							= src.DmBatchKEY
+		, tgt.DmModifiedDTS							= src.DmModifiedDTS
 
 	WHEN NOT MATCHED THEN 
 
@@ -85,10 +96,10 @@ BEGIN TRY
 			, [SellAreaCD]            	
 			, [SellAreaUnit]        	
 			, DmBatchKEY			
-			, DmBeginDTS						
-			, DmEndDTS						
+			, DmBeginDTS					
 			, DmActiveFLG					
-			, DmBatchKEY					
+			, DmBatchKEY	
+			, DmCreateDTS
 
 		) VALUES (
 		
@@ -102,13 +113,14 @@ BEGIN TRY
 			, src.[District]            
 			, src.[OpenedOnDTS]         
 			, src.[ClosedOnDTS]         
-			, src.[SellArea]            
+			, src.[SellAreaCD]            
 			, src.[SellAreaUnit]        
 			, src.DmBatchKEY	
 			, src.DmBeginDTS
 			, src.DmEndDTS
 			, src.DmActiveFLG
 			, src.DmBatchKEY	
+			, src.DmCreateDTS
 		);
 
 	SET @RowsInserted	= @@ROWCOUNT;

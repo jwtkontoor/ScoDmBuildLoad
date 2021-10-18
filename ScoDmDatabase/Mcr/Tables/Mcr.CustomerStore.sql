@@ -6,7 +6,7 @@
 	--Business Key(s) 
 	, [RetailSiteID]				VARCHAR(50)			NULL	
 
-	--Information Columns - Keep in aplha order
+	--Information Columns - Keep in aplha order 
 	, [City]               			VARCHAR(50)			NULL	
 	, [ClosedOnDTS]					DATETIME			NULL
 	, [Country]						VARCHAR(50)			NULL	   
@@ -16,10 +16,15 @@
 	, [KeyAccountCD]				VARCHAR(50)			NOT NULL 
 	, [OpenedOnDTS]					DATETIME			NULL
 	, [PlantCategoryCD]				VARCHAR(50)			NOT NULL
-	, [Region]  					VARCHAR(50)			NULL
-	, [SiteDESC]					VARCHAR(255)		NULL      
+      , [PlantTypeCD]                VARCHAR(40)             NULL 
+	, [Region]  					VARCHAR(50)			NULL   
 	, [SellAreaCD]  				VARCHAR(50)			NULL          	
 	, [SellAreaUnit]				VARCHAR(50)			NULL  
+    , [ShipToCustomerID]		    VARCHAR(40)         NULL 
+    , [ShipToDESC]					VARCHAR(40)			NULL 
+	, [SiteDESC]					VARCHAR(255)		NULL    
+	  , [SoldToCustomerID]          VARCHAR(40)             NULL 
+	  , [SoldToDESC]                VARCHAR(40)             NULL
 	, [StoreId]						INT					NOT NULL 
 	, [StoreNM]						VARCHAR(50)			NULL	
 	

@@ -22,11 +22,15 @@ BEGIN TRY
 WITH SapStores AS 
 (
 	SELECT 
-        rs.[RETAILSITE]
-      , ka.[RP_KEYACCOUNT]                      AS [KEYACCOUNT]
+        rs.[RETAILSITE]							AS [RetailSiteID]
+      , ka.[RP_KEYACCOUNT]                      AS [KeyAccountCD]
+	  , 'INTERNAL'								AS [SoldToCustomerID]
+	  , 'KONTOOR'								AS [SoldToDESC]
+      , ka.[CUSTOMER]							AS [ShipToCustomerID]		
+      , ka.[DESCRIPTION]						AS [SapShipToDESC]
       , rs.[PLANTCATEGORY]
       , rs.[PLANTTYPE]
-      , rs.[SITE_DESCRIPTION]
+      , rs.[SITE_DESCRIPTION]					AS [SiteDESC]
       , rs.[REGION]
       , rs.[COUNTRY]
       , rs.[CITY]
@@ -37,49 +41,68 @@ WITH SapStores AS
       , rs.[SELLAREA_UNIT]
     FROM [dbo].[SAP_MD_RETAILSITE]  rs
     INNER JOIN SAP_MD_CUSTOMER ka
-    ON rs.RETAILSITE = right(cs.CUSTOMER,4)
+    ON rs.RETAILSITE = RIGHT(ka.CUSTOMER,4)
     WHERE 1 = 1 
+	AND LEFT(ka.CUSTOMER,6) = '000000'
     AND [PLANTCATEGORY] = 'A'
 
   UNION 
 
   SELECT 
-    [RETAILSITE]
-      ,[KEYACCOUNT]
+		[RETAILSITE]							AS [RetailSiteID]
+      ,nown.[KEYACCOUNT]						AS [KeyAccountCD]
+	  , dbi.[SAP_CUST_ID]						AS [SoldToCustomerID]
+	  , dbi.[KEY_ACCOUNT_DESC]					AS [SoldToDESC]
+      , c.CUSTOMER								AS [ShipToCustomerID]		
+      , c.[DESCRIPTION]							AS [SapShipToDESC]
       ,[PLANTCATEGORY]
-      ,[SITE_DESCRIPTION]
-      ,[REGION]
-      ,[COUNTRY]
-      ,[CITY]
-      ,[DISTRICT]
+      , NULL									AS [PLANTTYPE]
+      ,[SITE_DESCRIPTION]						AS [SiteDESC]
+      ,nown.[REGION]
+      ,nown.[COUNTRY]
+      ,nown.[CITY]
+      ,nown.[DISTRICT]
       ,[OPENDATS]
       ,[CLOSEDATS]
       ,[SELLAREA]
       ,[SELLAREA_UNIT]
-  FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED]
+  FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED] nown
+  INNER JOIN [DB_WW_LOGILITY_DEV].[dbo].[LOG_RO_KEY_ACCOUNT_DB_INSTANCE] dbi
+  ON nown.KEYACCOUNT = dbi.KEY_ACCOUNT
+  INNER JOIN [LOGILITY_SLT_PPD].[sapee1et1].[EDPAR] e
+  ON [PARVW] = [PARTNER_FUNCTION] AND [KUNNR] = [SAP_CUST_ID] 
+  INNER JOIN [dbo].[SAP_MD_CUSTOMER] c ON e.INPNR = c.CUSTOMER
 )
 	
 INSERT INTO Stage.CustomerStore ( 
 
-    [RetailSite]   
-      ,[KeyAccount]                  
-      ,[PlantCategory]              
-      ,[SiteDescription]            
+    [RetailSiteId]   
+      ,[KeyAccountCD]       
+      , [SoldToCustomerID]
+      , [SoldToDESC] 
+      ,[ShipToCustomerID]
+      ,[ShipToDESC]
+      ,[PlantCategoryCD]              
+      ,[SiteDESC]            
       ,[Region]                     
       ,[Country]                    
       ,[City]                       
       ,[District]                   
       ,[OpenedOnDTS]                
       ,[ClosedOnDTS]                
-      ,[SellArea]                   
+      ,[SellAreaCD]                   
       ,[SellAreaUnit]               
 
 )
 SELECT 
-    a.[RETAILSITE]
-    , a.[KEYACCOUNT]
-    , a.[PLANTCATEGORY]
-    , a.[SITE_DESCRIPTION]
+    a.[RetailSiteID]
+    , a.[KeyAccountCD]     
+      , [SoldToCustomerID]
+      , [SoldToDESC] 
+      ,[ShipToCustomerID]
+      ,[SapShipToDESC]
+      ,[PlantCategory]              
+      ,[SiteDESC]  
     , a.[REGION]
     , a.[COUNTRY]
     , a.[CITY]
