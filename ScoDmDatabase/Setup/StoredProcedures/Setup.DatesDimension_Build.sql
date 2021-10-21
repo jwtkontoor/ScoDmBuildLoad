@@ -3,25 +3,53 @@
 
 	AS 
 
-DECLARE @StartDate datetime
-DECLARE @EndDate datetime
+DECLARE @StartDate DATE
+DECLARE @EndDate DATE
 
 --- assign values to the start date and end date we 
 -- want our reports to cover (this should also take
 -- into account any future reporting needs)
-SET @StartDate = '01/01/2005'
-SET @EndDate = '31/12/2007' 
+SET @StartDate = '01/01/2010'
+SET @EndDate = '12/31/2299' 
 
 -- using a while loop increment from the start date 
 -- to the end date
-DECLARE @LoopDate datetime
+DECLARE @LoopDate DATE
+DECLARE @Today DATE = GETDATE()
 SET @LoopDate = @StartDate
 
 WHILE @LoopDate <= @EndDate
 BEGIN
  -- add a record into the date dimension table for this date
- INSERT INTO Mcr.Calendar VALUES (
-	  FORMAT ( @LoopDate, 'yyyymmdd' ) 			--[CalendarDT]				
+ INSERT INTO Dim.Calendar VALUES (
+	FORMAT ( @LoopDate, 'yyyymmdd' ) 			--[CalendarDT]	
+	, CAST ( @LoopDate AS DATETIME )			--[CalendarDateTimeDTS]			       
+	, CAST ( @LoopDate AS DATE )				--[CalendarDTS]					       
+	, CAST ( @LoopDate AS DATE )				--[CalendarDateDESC]				   
+	, DATEPART (dw, @LoopDate )				--[CalendarDayOfWeekID]  		       
+	, DATENAME (dw, @LoopDate )				--[CalendarDayOfWeekNM]			       
+	--[CalendarDayOfMonthID]		       
+	, NULL				--[CalendarDayOfYearID]			       
+	, NULL				--[CalendarWeekofYearID]				       
+	, NULL				--[CalendarWeekNM]				       
+	, NULL				--[CalendarMonthID]				       
+	, DATENAME (month, @LoopDate )				--[CalendarMonthNM]				       
+	, NULL				--[CalendarQuarterID]			       
+	, NULL				--[CalendarQuarterNM]			       
+	, NULL				--[CalendarQuarterFirstDayID]	       
+	, NULL				--[CalendarQuarterLastDayID]	       
+	, NULL				--[CalendarYearID]				       
+	, NULL				--[CalendarYearNM]				       
+	, NULL				--[CalendarYearFirstDayID]		       
+	, NULL				--[CalendarYearLastDayID]		       
+	, NULL				--[CalendarYearMonthNM]			       
+	, NULL				--[CurrentDateFLG]				       
+	, NULL				--[DefinedHolidayFLG]			       
+	, NULL				--[LastWeekFLG]					       
+	, CASE 
+		WHEN DATEPART (dw, @LoopDate ) IN ( 1,7 ) THEN 1
+		ELSE 0
+	END										--[WeekendFLG]					       
 	--, Year(@LoopDate) 
 	--, Month(@LoopDate)  
 	--, Day(@LoopDate) 

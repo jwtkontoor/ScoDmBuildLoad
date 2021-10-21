@@ -17,6 +17,38 @@ AS
 
 BEGIN TRY
 
+	WITH MergeCustomerStore AS 
+	( 		
+		SELECT 
+			  a.[RetailSiteID]  
+			, a.[KeyAccountCD]   
+			, a.[SoldToCustomerID] 
+			, a.[SoldToDESC]
+			, a.[ShipToCustomerID]	
+			, a.[ShipToDESC]
+			, a.[PlantTypeCD]
+			, a.[PlantCategoryCD]              
+			, a.[SiteDESC]            
+			, a.[Region]                     
+			, a.[Country]                    
+			, a.[City]                       
+			, a.[District]                   
+			, a.[OpenedOnDTS]                
+			, a.[ClosedOnDTS]                
+			, a.[SellAreaCD]                   
+			, a.[SellAreaUnit] 
+			, 0							AS [HasChangedFLG]					
+			, CASE 
+				WHEN a.[ClosedOnDTS] < GETDATE() THEN 0 
+				ELSE 1 
+			END							AS [IsCurrentFLG]					
+			, a.[ClosedOnDTS]			AS [DmValidToDTS]				
+			, a.[OpenedOnDTS]			AS [DmValidFromDTS]					
+		FROM
+			Stage.CustomerStore a
+
+	)
+
 	MERGE INTO Mcr.CustomerStore tgt
 
 	USING ( 
@@ -39,8 +71,12 @@ BEGIN TRY
 			, a.[ClosedOnDTS]                
 			, a.[SellAreaCD]                   
 			, a.[SellAreaUnit] 
+			, a.[HasChangedFLG]					
+			, a.[IsCurrentFLG]					
+			, a.[DmValidToDTS]				
+			, a.[DmValidFromDTS]					
 		FROM
-			Stage.CustomerStore a
+			MergeCustomerStore a
 
 	) src 
 
@@ -89,7 +125,11 @@ BEGIN TRY
 			, [OpenedOnDTS]         	
 			, [ClosedOnDTS]         	
 			, [SellAreaCD]            	
-			, [SellAreaUnit]    				
+			, [SellAreaUnit]    
+			, [HasChangedFLG]	
+			, [IsCurrentFLG]	
+			, [DmValidToDTS]	
+			, [DmValidFromDTS]	
 
 		) VALUES (
 		
@@ -107,8 +147,12 @@ BEGIN TRY
 			, src.[District]            
 			, src.[OpenedOnDTS]         
 			, src.[ClosedOnDTS]         
-			, src.[SellArea]            
+			, src.[SellAreaCD]            
 			, src.[SellAreaUnit]   
+			, 1		
+			, src.[IsCurrentFLG]	
+			, src.[DmValidToDTS]	
+			, src.[DmValidFromDTS]				
 		);
 
 	SET @RowsInserted	= @@ROWCOUNT;
