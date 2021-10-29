@@ -22,70 +22,44 @@ WHILE @LoopDate <= @EndDate
 BEGIN
  -- add a record into the date dimension table for this date
  INSERT INTO Dim.Calendar VALUES (
-	FORMAT ( @LoopDate, 'yyyymmdd' ) 			--[CalendarDT]	
-	, CAST ( @LoopDate AS DATETIME )			--[CalendarDateTimeDTS]			       
-	, CAST ( @LoopDate AS DATE )				--[CalendarDTS]					       
-	, CAST ( @LoopDate AS DATE )				--[CalendarDateDESC]				   
+	CAST ( FORMAT ( @LoopDate, 'yyyymmdd' ) AS INT	)		--[DATEKEY]	
+	, CAST ( @LoopDate AS DATETIME )			--[CalendarDateTimeDTS]		       
+	, CAST ( @LoopDate AS DATE )				--[CalendarDTS]						       
+	, FORMAT (@LoopDate, 'D')					--[CalendarDateDESC]				   
 	, DATEPART (dw, @LoopDate )				--[CalendarDayOfWeekID]  		       
 	, DATENAME (dw, @LoopDate )				--[CalendarDayOfWeekNM]			       
-	--[CalendarDayOfMonthID]		       
-	, NULL				--[CalendarDayOfYearID]			       
-	, NULL				--[CalendarWeekofYearID]				       
-	, NULL				--[CalendarWeekNM]				       
-	, NULL				--[CalendarMonthID]				       
+	, DATENAME (dd, @LoopDate )	 --[CalendarDayOfMonthID]		       
+	, DATEDIFF (day, DATEFROMPARTS ( YEAR (@LoopDate), 1, 1 ), @LoopDate )				--[CalendarDayOfYearID]			       
+	, DATENAME (wk, @LoopDate )				--[CalendarWeekofYearID]				       
+	, DATENAME (wk, @LoopDate )				--[CalendarWeekNM]				       
+	, MONTH (@LoopDate)				--[CalendarMonthID]				       
 	, DATENAME (month, @LoopDate )				--[CalendarMonthNM]				       
-	, NULL				--[CalendarQuarterID]			       
-	, NULL				--[CalendarQuarterNM]			       
-	, NULL				--[CalendarQuarterFirstDayID]	       
-	, NULL				--[CalendarQuarterLastDayID]	       
-	, NULL				--[CalendarYearID]				       
-	, NULL				--[CalendarYearNM]				       
-	, NULL				--[CalendarYearFirstDayID]		       
-	, NULL				--[CalendarYearLastDayID]		       
-	, NULL				--[CalendarYearMonthNM]			       
-	, NULL				--[CurrentDateFLG]				       
-	, NULL				--[DefinedHolidayFLG]			       
-	, NULL				--[LastWeekFLG]					       
+	, DATEPART (qq, @LoopDate )				--[CalendarQuarterID]			       
+	, DATENAME (qq, @LoopDate )				--[CalendarQuarterNM]			       
+	, DATEFROMPARTS ( YEAR (@LoopDate), ((DATEPART (qq, @LoopDate )-1 )* 3)+ 1, 1 )					--[CalendarQuarterFirstDayID]	       
+	, EOMONTH (DATEFROMPARTS ( YEAR (@LoopDate), ((DATEPART (qq, @LoopDate ) - 1 )* 3) + 3, 1 ) )					--[CalendarQuarterLastDayID]	       
+	, YEAR (@LoopDate)				--[CalendarYearID]				       
+	, YEAR (@LoopDate)				--[CalendarYearNM]				       
+	, DATEFROMPARTS ( YEAR (@LoopDate), 1, 1 )				--[CalendarYearFirstDayID]		       
+	, EOMONTH (DATEFROMPARTS ( YEAR (@LoopDate), 12, 1 ) )				--[CalendarYearLastDayID]		       
+	, FORMAT ( @LoopDate, 'MMMM' ) 				--[CalendarYearMonthNM]			       
+	, 'N'				--[CurrentDateFLG]				       
+	, 'N'				--[DefinedHolidayFLG]		
+	, NULL --[FiscalMonthNUM]           		  
+	, NULL --[FiscalMonthStartDay]               
+	, NULL --[FiscalWeekNUM]           		  
+	, NULL --[FiscalWeekStartDay]                
+	, NULL --[FiscalYearNUM]           		  
+	, NULL --[FiscalYearStartDay]
+	, 'N'				--[LastWeekFLG]					       
 	, CASE 
 		WHEN DATEPART (dw, @LoopDate ) IN ( 1,7 ) THEN 1
 		ELSE 0
 	END										--[WeekendFLG]					       
-	--, Year(@LoopDate) 
-	--, Month(@LoopDate)  
-	--, Day(@LoopDate) 
-	--, CASE 
-	--	WHEN Month(@LoopDate) IN (1, 2, 3) THEN 1
-	--	WHEN Month(@LoopDate) IN (4, 5, 6) THEN 2
-	--	WHEN Month(@LoopDate) IN (7, 8, 9) THEN 3
-	--	WHEN Month(@LoopDate) IN (10, 11, 12) THEN 4
-	--END 			
-	--, FORMAT (@LoopDate, 'D')					--[CalendarDateDSC]			
-	--, 											--[CalendarDayOfWeekID]  	
-	--,											--[CalendarDayOfWeekNM]		
-	--,											--[CalendarDayOfMonthID]	
-	--,											--[CalendarDayOfYearID]		
-	--,											--[CalendarWeekID]			
-	--,											--[CalendarWeekNM]			
-	--,											--[CalendarYearWeekID]			
-	--,											--[CalendarYearWeekNM]			
-	--, MONTH(@LoopDate) 							--[CalendarMonthID]			
-	--, FORMAT ( @LoopDate, 'MMM' ) 				--[CalendarMonthShortNM]				
-	--, FORMAT ( @LoopDate, 'MMMM' ) 				--[CalendarMonthNM]			
-	--, FORMAT ( @LoopDate, 'MMM' ) 				--[CalendarYearMonthID]			
-	--, FORMAT ( @LoopDate, 'MMMM' ) 				--[CalendarYearMonthNM]			
-	--, ( MONTH(@LoopDate) % 3 ) + 1 				--[CalendarQuarterID]		
-	--, CAST ( (MONTH(@LoopDate) % 3 ) + 1  AS VARCHAR(100) )  				--[CalendarQuarterNM]		
-	--, ( MONTH(@LoopDate) % 3 ) + 1 				--[CalendarYearQuarterID]		
-	--, ( MONTH(@LoopDate) % 3 ) + 1				--[CalendarYearQuarterNM]		
-	--,											--[CalendarYearID]			
-	--,											--[CalendarYearNM]			
-	--,											--[CalendarYearMonthNM]		
-	--,											--[CurrentDateFLG]			
-	--,											--[DefinedHolidayFLG]		
-	--,											--[WeekendFLG]				
-	--,											--[LastWeekFLG]				
+	
    
  )  
+ --WHERE 1 = 1 
  
  -- increment the LoopDate by 1 day before
  -- we start the loop again

@@ -23,12 +23,12 @@
     , [CalendarYearMonthNM]			        VARCHAR(255)	        NOT NULL		    DEFAULT ('MISSING') 
     , [CurrentDateFLG]				        VARCHAR(255)	        NOT NULL		    DEFAULT ('N')  
     , [DefinedHolidayFLG]			        VARCHAR(255)	        NOT NULL		    DEFAULT ('N') 
-    , [FiscalMonthNUM]           		    INT				        NOT NULL		    DEFAULT -1 
-    , [FiscalMonthStartDay]                 DATE			        NOT NULL		    DEFAULT '12-31-2021'
-    , [FiscalWeekNUM]           		    INT				        NOT NULL		    DEFAULT -1 
-    , [FiscalWeekStartDay]                  DATE			        NOT NULL		    DEFAULT '12-31-2021'
-    , [FiscalYearNUM]           		    INT				        NOT NULL		    DEFAULT -1 
-    , [FiscalYearStartDay]                  DATE			        NOT NULL		    DEFAULT '12-31-2021'
+    , [FiscalMonthNUM]           		    INT				        NULL		        DEFAULT -1 
+    , [FiscalMonthStartDay]                 DATE			        NULL		        DEFAULT '12-31-2021'
+    , [FiscalWeekNUM]           		    INT				        NULL		        DEFAULT -1 
+    , [FiscalWeekStartDay]                  DATE			        NULL		        DEFAULT '12-31-2021'
+    , [FiscalYearNUM]           		    INT				        NULL		        DEFAULT -1 
+    , [FiscalYearStartDay]                  DATE			        NULL		        DEFAULT '12-31-2021'
 	, [LastWeekFLG]					        VARCHAR(255)	        NOT NULL		    DEFAULT ('N')   
     , [WeekendFLG]					        VARCHAR(255)	        NOT NULL		    DEFAULT ('N') 
 
