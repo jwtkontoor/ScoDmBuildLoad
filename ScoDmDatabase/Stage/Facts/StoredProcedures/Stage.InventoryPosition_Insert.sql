@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [Fact].[InventoryPosition_Merge]
+﻿CREATE PROCEDURE [Stage].[InventoryPosition_Insert]
 
 	@BatchKEY INT
 
@@ -16,39 +16,53 @@ AS
 --============================================================================================================
 
 BEGIN TRY
+	
+	TRUNCATE TABLE Stage.Shipment; 
 
-	MERGE INTO Fact.InventoryPosition tgt
+WITH SapShipments AS 
+(
+  SELECT 
+        [ORDERTYPE] AS OrderTypeCD
+      ,[SORDER] AS SalesOrderNUM
+      ,[SORDER_ITEM] AS SaledOrderItemNUM
+      ,[SORDER_SCHEDLINE] 
+      ,[MATNR] AS MaterialID
+      ,[PLANT] AS PlantId
+      ,[SOLDTO] AS SoldToCustomerId
+      ,[SHIPTO]
+      ,[MARKFOR]
+      ,[DISTCHANNEL]
+      ,[REGION]
+      ,[FISCVRNT_MTH]
+      ,[FISCMONTH]
+      ,[CALDAY]
+      ,[UOM]
+      ,[ZQTY_OPEN]
+      ,[ZQTY_CONFIRMED]
+      ,[ZQTY_DELIVERED]
+      ,[ZQTY_CANCELLED]
+      ,[KEYACCOUNT]
+      ,[TRACKING_NUM]
+      ,[REQ_SEGMENT]
+      ,[SEASON]
+      ,[SEASON_YEAR]
+      ,[REASON]
+      ,[ORG_ORD_QTY]
+      ,[ORG_ORD_DAY]
+  FROM [DB_WW_LOGILITY_DEV].[dbo].[SAP_TD_SALESORDERS]
+  --FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED]
+)
+	
+INSERT INTO Stage.Shipment ( 
 
-	USING ( 
+    [ShipmentId]                  
 
-		SELECT 
-		  a.[InventoryKEY]	
-		FROM
-			Work.Inventory a
+)
+SELECT 
+    a.[ShipmentId]
+FROM SapShipments a ;
 
-	) src 
-
-	ON ( 
-
-		tgt.InventoryKEY = src.InventoryKEY
-	)
-
-	WHEN MATCHED THEN 
-
-		UPDATE SET
-
-		  tgt.[InventoryKEY]								= src.[InventoryKEY]	
-
-	WHEN NOT MATCHED THEN 
-
-		INSERT (
-
-			  [InventoryKEY]
-
-		) VALUES (
-		
-			  src.[InventoryKEY]
-		);
+--=================================================================================================
 
 	SET @RowsInserted	= @@ROWCOUNT;
 	SET @ProcessEndDT	= GETDATE();
@@ -87,4 +101,3 @@ BEGIN CATCH
 	);
 
 END CATCH;
-

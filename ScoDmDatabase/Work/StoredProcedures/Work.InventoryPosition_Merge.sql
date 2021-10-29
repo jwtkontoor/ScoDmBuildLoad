@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [Work].[Inventory_Merge]
+﻿CREATE PROCEDURE [Work].[InventoryPosition_Merge]
 
 	@BatchKEY INT
 
@@ -17,37 +17,37 @@ AS
 
 BEGIN TRY
 
-	MERGE INTO Fact.Inventory tgt
+	MERGE INTO Fact.InventoryPosition tgt
 
 	USING ( 
 
 		SELECT 
-		  a.[InventoryKEY]	
+		  a.[InventoryPositionKEY]	
 		FROM
-			Work.Inventory a
+			Work.InventoryPosition a
 
 	) src 
 
 	ON ( 
 
-		tgt.InventoryKEY = src.InventoryKEY
+		tgt.InventoryPositionKEY = src.InventoryPositionKEY
 	)
 
 	WHEN MATCHED THEN 
 
 		UPDATE SET
 
-		  tgt.[InventoryKEY]								= src.[InventoryKEY]	
+		  tgt.[InventoryPositionKEY]	= src.[InventoryPositionKEY]	
 
 	WHEN NOT MATCHED THEN 
 
 		INSERT (
 
-			  [InventoryKEY]
+			  [InventoryPositionKEY]
 
 		) VALUES (
 		
-			  src.[InventoryKEY]
+			  src.[InventoryPositionKEY]
 		);
 
 	SET @RowsInserted	= @@ROWCOUNT;

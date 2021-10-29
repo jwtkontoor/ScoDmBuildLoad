@@ -3,16 +3,16 @@
 	Working Fact Table 
 	Created By: JWT					Created On: 7/26/21
 
-	Used for loading the Inventory Fact table.  See Inventory Fact for details.
+	Used for loading the InventoryPosition Fact table.  See InventoryPosition Fact for details.
 
 **/
 /*******************************************************************************/
 
-CREATE TABLE [Work].[Inventory]
+CREATE TABLE [Work].[InventoryPosition]
 (
 	--Primary Key - natural and surrogate
-	[InventoryKEY]			INT			NOT NULL		IDENTITY (1,1) 
-	, [InventoryId]			INT			NOT NULL 
+	[InventoryPositionKEY]			INT			NOT NULL		IDENTITY (1,1) 
+	, [InventoryPositionId]			INT			NOT NULL 
 
 	--Foreign Keys  - natural and surrogate  
 	, [CustomerId]			INT			NOT NULL		
@@ -24,9 +24,9 @@ CREATE TABLE [Work].[Inventory]
 	, [DmModifiedDate]		DATETIME			NOT NULL		DEFAULT(GETDATE()) 
 
 	--Table Constraints PK First then Forign Keys
-	, CONSTRAINT [PK_Work_Inventory_InventoryId] PRIMARY KEY CLUSTERED ([InventoryKEY] ASC)
+	, CONSTRAINT [PK_Work_InventoryPosition_InventoryPositionId] PRIMARY KEY CLUSTERED ([InventoryPositionKEY] ASC)
 );
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [UIX_Work_Inventory_InventoryId] ON [Work].[Inventory] (InventoryId ASC)
+CREATE UNIQUE NONCLUSTERED INDEX [UIX_Work_InventoryPosition_InventoryPositionId] ON [Work].[InventoryPosition] (InventoryPositionId ASC)
 GO

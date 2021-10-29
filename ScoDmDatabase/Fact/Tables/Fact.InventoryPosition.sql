@@ -9,13 +9,15 @@
 **/
 /*******************************************************************************/
 
-CREATE TABLE [Fact].[Inventory]
+CREATE TABLE [Fact].[InventoryPosition]
 (
 	--Surrogate (Primary) Key
-	[InventoryKEY]			INT			NOT NULL
+	[InventoryPositionKEY]			INT			NOT NULL
 	
 	--ForignKeys
-	, [CustomerKEY] 		INT			NOT NULL		
+	, [CustomerKEY] 		INT			NOT NULL	
+	, [ProductKEY] 			INT			NOT NULL	
+	, [PositionDateKEY] 	INT			NOT NULL	
 
 	--Data Columns
 
@@ -25,7 +27,7 @@ CREATE TABLE [Fact].[Inventory]
 	, [DmModifiedDate]		DATETIME			NOT NULL		DEFAULT(GETDATE()) 
 
 	--Table Constraints PK First then Foerign Keys 
-    , CONSTRAINT [PK_Fact_Inventory_InventoryKEY] PRIMARY KEY CLUSTERED ([InventoryKEY] ASC) 
+    , CONSTRAINT [PK_Fact_InventoryPosition_InventoryPositionKEY] PRIMARY KEY CLUSTERED ([InventoryPositionKEY] ASC) 
 )
 
 --Additional Indexes

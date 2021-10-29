@@ -107,7 +107,7 @@
     <Build Include="Dim\Tables\Dim.Product.sql" />
     <Build Include="Dim\StoredProcedures\Dim.Product_Merge.sql" />
     <Build Include="Fact\StoredProcedures\Fact.Inventory_Merge.sql" />
-    <Build Include="Fact\Tables\Fact.Inventory.sql" />
+    <Build Include="Fact\Tables\Fact.InventoryPosition.sql" />
     <Build Include="Security\Schemas\Dim.sql" />
     <Build Include="Security\Schemas\Fact.sql" />
     <Build Include="Security\Schemas\Log.sql" />
@@ -133,7 +133,7 @@
     <Build Include="Setup\StoredProcedures\Setup.DatesDimension_Build.sql" />
     <Build Include="Stage\Dimensions\StoredProcedures\Stage.Product_Insert.sql" />
     <Build Include="Stage\Dimensions\Tables\Stage.Product.sql" />
-    <Build Include="Work\Tables\Work.Inventory.sql" />
+    <Build Include="Work\Tables\Work.InventoryPosition.sql" />
     <Build Include="Stage\Dimensions\Tables\Stage.CustomerStore.sql" />
     <Build Include="Fact\Tables\Fact.Shipment.sql" />
     <Build Include="Mcr\Tables\Mcr.Calendar.sql" />
@@ -142,12 +142,14 @@
     <Build Include="Stage\Facts\StoredProcedures\Stage.Shipment_Insert.sql" />
     <Build Include="Work\Tables\Work.Shipment.sql" />
     <Build Include="Fact\StoredProcedures\Fact.Shipment_Merge.sql" />
-    <Build Include="Stage\Facts\Tables\Stage.Inventory.sql" />
-    <Build Include="Stage\Facts\StoredProcedures\Stage.Inventory_Insert.sql" />
+    <Build Include="Stage\Facts\Tables\Stage.InventoryPosition.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.InventoryPosition_Insert.sql" />
     <Build Include="Mcr\StoredProcedures\Mcr.CustomerStore_Merge.sql" />
-    <Build Include="Work\StoredProcedures\Work.Inventory_Merge.sql" />
+    <Build Include="Work\StoredProcedures\Work.InventoryPosition_Merge.sql" />
     <Build Include="Work\StoredProcedures\Work.Shipment_Merge.sql" />
     <Build Include="Dim\StoredProcedures\Dim.CustomerStore_Merge.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.Capacity.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.Planning.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ScoDmDatabase.refactorlog" />
