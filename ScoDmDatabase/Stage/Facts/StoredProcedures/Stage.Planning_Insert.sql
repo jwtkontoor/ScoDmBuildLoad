@@ -17,23 +17,23 @@ AS
 
 BEGIN TRY
 	
-	TRUNCATE TABLE Stage.Shipment; 
+	TRUNCATE TABLE Stage.Planning; 
 
-WITH SapShipments AS 
+WITH SapPlanning AS 
 (
   SELECT 
     1						AS [ShipmentId]
   --FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED]
 )
 	
-INSERT INTO Stage.Shipment ( 
+INSERT INTO Stage.Planning ( 
 
-    [ShipmentId]                  
+    [PlanningId]                  
 
 )
 SELECT 
-    a.[ShipmentId]
-FROM SapShipments a ;
+    a.[PlanningId]
+FROM SapPlanning a ;
 
 --=================================================================================================
 

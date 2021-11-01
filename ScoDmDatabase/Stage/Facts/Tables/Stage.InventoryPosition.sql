@@ -1,4 +1,4 @@
 ﻿CREATE TABLE [Stage].[InventoryPosition]
 (
-	[Id] INT NOT NULL PRIMARY KEY
+	[InventoryPositionId] INT NOT NULL PRIMARY KEY
 )

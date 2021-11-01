@@ -143,7 +143,7 @@
     <Build Include="Work\Tables\Work.Shipment.sql" />
     <Build Include="Fact\StoredProcedures\Fact.Shipment_Merge.sql" />
     <Build Include="Stage\Facts\Tables\Stage.InventoryPosition.sql" />
-    <Build Include="Stage\Facts\StoredProcedures\Stage.InventoryPosition_Insert.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.InventoryPosition_Sap_Insert.sql" />
     <Build Include="Mcr\StoredProcedures\Mcr.CustomerStore_Merge.sql" />
     <Build Include="Work\StoredProcedures\Work.InventoryPosition_Merge.sql" />
     <Build Include="Work\StoredProcedures\Work.Shipment_Merge.sql" />
@@ -152,6 +152,8 @@
     <Build Include="Stage\Facts\Tables\Stage.Capacity.sql" />
     <Build Include="Stage\Facts\StoredProcedures\Stage.Capacity_Insert.sql" />
     <Build Include="Stage\Facts\StoredProcedures\Stage.Planning_Insert.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.InventoryPosition_Edi_Insert.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.InventoryPosition_LeadTime_Merge.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ScoDmDatabase.refactorlog" />

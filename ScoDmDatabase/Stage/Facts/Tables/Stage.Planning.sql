@@ -1,4 +1,4 @@
 ﻿CREATE TABLE [Stage].[Planning]
 (
-	[Id] INT NOT NULL PRIMARY KEY
+	[PlanningId] INT NOT NULL PRIMARY KEY
 )
