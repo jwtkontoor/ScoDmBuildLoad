@@ -30,20 +30,20 @@ BEGIN TRY
 
 	ON ( 
 
-		tgt.InventoryKEY = src.InventoryKEY
+		tgt.InventoryPositionKEY = src.InventoryPositionKEY
 	)
 
 	WHEN MATCHED THEN 
 
 		UPDATE SET
 
-		  tgt.[InventoryKEY]								= src.[InventoryKEY]	
+		  tgt.[InventoryPositionKEY]								= src.[InventoryPositionKEY]	
 
 	WHEN NOT MATCHED THEN 
 
 		INSERT (
 
-			  [InventoryKEY]
+			  [InventoryPositionKEY]
 
 		) VALUES (
 		
