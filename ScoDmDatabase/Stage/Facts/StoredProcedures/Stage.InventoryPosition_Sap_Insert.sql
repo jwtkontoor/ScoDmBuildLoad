@@ -17,9 +17,9 @@ AS
 
 BEGIN TRY
 	
-	TRUNCATE TABLE Stage.Shipment; 
+	TRUNCATE TABLE Stage.InventoryPosition; 
 
-WITH SapShipments AS 
+WITH CurrInventoryPosition AS 
 (
       SELECT 
     [SORDER] + '|' + [SORDER_ITEM] + '|' + [SORDER_SCHEDLINE] AS InventoryPositionId
@@ -126,14 +126,107 @@ WITH SapShipments AS
 
 )
 	
-INSERT INTO Stage.Shipment ( 
+INSERT INTO Stage.InventoryPosition ( 
 
-    [ShipmentId]                  
-
-)
+    [InventoryPositionId]				
+    , OrderTypeCD						
+    , SalesOrderNUM						
+    , SaledOrderItemNUM					
+    , SaledOrderItemLineNUM 			
+    , [KeyAccountCD]					
+    , [MaterialId]						
+    , [PlantId]							
+    , [SoldToCustomerId]				
+    , [ShipToCustomerId]				
+    , [MarkForCD]						
+    , [CalendarDTS] 					
+    , [DisributionChannel]				
+    , [RegionCD]						
+    , [UOM]								
+    , [EdiProcessDTS]					
+    , [EdiPostDTS]						
+    , [EdiOnHandQTY]					
+    , [EdiIntransitQTY]					
+    , [EdiOnOrderQty]					
+    , [EdiReceiptQTY]					
+    , [EdiSalesQTY]						
+    , [EDI852_ADJ_INV_QTY]				
+    , [EDI852_RTN_QTY]					
+    , [SAP_OPEN_ORDER_QTY]				
+    , [SAP_DAY_SHIPPED_QTY]				
+    , [PI_BEG_OH_QTY]					
+    , [PI_OPEN_ORDER_QTY]				
+    , [PI_INTRANSIT_QTY]				
+    , [PI_OO_ADJ_QTY]					
+    , [PI_ASSUMED_RCPT_QTY]				
+    , [PI_END_OH_QTY]					
+    , [PI_ORIG_END_OH_QTY]				
+    , [PI_PROCESSED_FLG]  				
+    , [ZQTY_OPEN]						
+    , [ZQTY_CONFIRMED]					
+    , [ZQTY_DELIVERED]					
+    , [ZQTY_CANCELLED]					
+    , [TrackingNUM]						
+    , [REQ_SEGMENT]						
+    , [SEASON]							
+    , [SEASON_YEAR]				
+    , [ReasonCD]				
+    , [ORG_ORD_QTY]					
+    , [ORG_ORD_DAY]				
+    , [SapOrder]						
+    , [EdiOrder]			
+    )
 SELECT 
-    a.[ShipmentId]
-FROM SapShipments a ;
+    
+    [InventoryPositionId]				
+    , OrderTypeCD						
+    , SalesOrderNUM						
+    , SaledOrderItemNUM					
+    , SaledOrderItemLineNUM 			
+    , [KeyAccountCD]					
+    , [MaterialId]						
+    , [PlantId]							
+    , [SoldToCustomerId]				
+    , [ShipToCustomerId]				
+    , [MarkForCD]						
+    , [CalendarDTS] 					
+    , [DisributionChannel]				
+    , [RegionCD]						
+    , [UOM]								
+    , [EdiProcessDTS]					
+    , [EdiPostDTS]						
+    , [EdiOnHandQTY]					
+    , [EdiIntransitQTY]					
+    , [EdiOnOrderQty]					
+    , [EdiReceiptQTY]					
+    , [EdiSalesQTY]						
+    , [EDI852_ADJ_INV_QTY]				
+    , [EDI852_RTN_QTY]					
+    , [SAP_OPEN_ORDER_QTY]				
+    , [SAP_DAY_SHIPPED_QTY]				
+    , [PI_BEG_OH_QTY]					
+    , [PI_OPEN_ORDER_QTY]				
+    , [PI_INTRANSIT_QTY]				
+    , [PI_OO_ADJ_QTY]					
+    , [PI_ASSUMED_RCPT_QTY]				
+    , [PI_END_OH_QTY]					
+    , [PI_ORIG_END_OH_QTY]				
+    , [PI_PROCESSED_FLG]  				
+    , [ZQTY_OPEN]						
+    , [ZQTY_CONFIRMED]					
+    , [ZQTY_DELIVERED]					
+    , [ZQTY_CANCELLED]					
+    , [TrackingNUM]						
+    , [REQ_SEGMENT]						
+    , [SEASON]							
+    , [SEASON_YEAR]				
+    , [ReasonCD]				
+    , [ORG_ORD_QTY]					
+    , [ORG_ORD_DAY]				
+    , [SapOrder]						
+    , [EdiOrder]		
+
+FROM CurrInventoryPosition a ;
 
 --=================================================================================================
 

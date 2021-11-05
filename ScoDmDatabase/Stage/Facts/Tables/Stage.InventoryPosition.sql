@@ -1,4 +1,50 @@
 ﻿CREATE TABLE [Stage].[InventoryPosition]
 (
-	[InventoryPositionId] INT NOT NULL PRIMARY KEY
+	  [InventoryPositionId]				VARCHAR(255)		NOT NULL	
+	, OrderTypeCD						VARCHAR(255)		NULL
+	, SalesOrderNUM						VARCHAR(255)		NULL
+	, SaledOrderItemNUM					VARCHAR(255)		NULL
+	, SaledOrderItemLineNUM 			VARCHAR(255)		NULL
+	, [KeyAccountCD]					VARCHAR(255)		NULL		
+	, [MaterialId]						VARCHAR(255)		NOT NULL
+	, [PlantId]							VARCHAR(255)		NULL
+	, [SoldToCustomerId]				VARCHAR(255)		NULL
+	, [ShipToCustomerId]				VARCHAR(255)		NULL
+	, [MarkForCD]						VARCHAR(255)		NULL
+	, [CalendarDTS] 					DATE					NULL
+	, [DisributionChannel]				VARCHAR(255)		NULL
+	, [RegionCD]						VARCHAR(255)		NULL
+	, [UOM]								VARCHAR(255)		NULL
+	, [EdiProcessDTS]					DATE		NULL
+	, [EdiPostDTS]						DATE		NULL
+	, [EdiOnHandQTY]					INT			NULL
+	, [EdiIntransitQTY]					INT			NULL
+	, [EdiOnOrderQty]					INT			NULL
+	, [EdiReceiptQTY]					INT			NULL
+	, [EdiSalesQTY]						INT			NULL
+	, [EDI852_ADJ_INV_QTY]				INT			NULL
+	, [EDI852_RTN_QTY]					INT			NULL
+	, [SAP_OPEN_ORDER_QTY]				INT			NULL
+	, [SAP_DAY_SHIPPED_QTY]				INT			NULL
+	, [PI_BEG_OH_QTY]					INT			NULL
+	, [PI_OPEN_ORDER_QTY]				INT			NULL
+	, [PI_INTRANSIT_QTY]				INT			NULL
+	, [PI_OO_ADJ_QTY]					INT			NULL
+	, [PI_ASSUMED_RCPT_QTY]				INT			NULL
+	, [PI_END_OH_QTY]					INT			NULL
+	, [PI_ORIG_END_OH_QTY]				INT			NULL
+	, [PI_PROCESSED_FLG]  				INT			NULL
+	, [ZQTY_OPEN]						INT			NULL
+	, [ZQTY_CONFIRMED]					INT			NULL
+	, [ZQTY_DELIVERED]					INT			NULL
+	, [ZQTY_CANCELLED]					INT			NULL
+	, [TrackingNUM]						VARCHAR(255)	NULL
+	, [REQ_SEGMENT]						VARCHAR(255)	NULL
+	, [SEASON]							VARCHAR(255)	NULL
+	, [SEASON_YEAR]				VARCHAR(255)	NULL
+	, [ReasonCD]				VARCHAR(255)			NULL
+	, [ORG_ORD_QTY]				INT			NULL
+	, [ORG_ORD_DAY]				INT			NULL
+	, [SapOrder]								INT			NULL
+	, [EdiOrder]				INT			NULL
 )
