@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE [Stage].[InventoryPositionSap_Insert] 
+﻿CREATE PROCEDURE [Stage].[InventoryPositionSap_Insert] 
 
 	@BatchKEY INT
 
@@ -139,8 +139,8 @@ INSERT INTO Stage.InventoryPosition (
     [InventoryPositionId]				
     , OrderTypeCD						
     , SalesOrderNUM						
-    , SaledOrderItemNUM					
-    , SaledOrderItemLineNUM 			
+    , SalesOrderItemNUM					
+    , SalesOrderItemLineNUM 			
     , [KeyAccountCD]					
     , [MaterialId]						
     , [PlantId]							
