@@ -3,20 +3,23 @@
 	  [InventoryPositionId]				VARCHAR(255)		NOT NULL	
 	, OrderTypeCD						VARCHAR(255)		NULL
 	, SalesOrderNUM						VARCHAR(255)		NULL
-	, SaledOrderItemNUM					VARCHAR(255)		NULL
-	, SaledOrderItemLineNUM 			VARCHAR(255)		NULL
+	, SalesOrderItemNUM					VARCHAR(255)		NULL
+	, SalesOrderItemLineNUM 			VARCHAR(255)		NULL
 	, [KeyAccountCD]					VARCHAR(255)		NULL		
 	, [MaterialId]						VARCHAR(255)		NOT NULL
 	, [PlantId]							VARCHAR(255)		NULL
 	, [SoldToCustomerId]				VARCHAR(255)		NULL
 	, [ShipToCustomerId]				VARCHAR(255)		NULL
 	, [MarkForCD]						VARCHAR(255)		NULL
-	, [CalendarDTS] 					DATE					NULL
+	, [CalendarDTS] 					DATE				NULL
+	, [CalendarDateKEY] 				INT					NULL
 	, [DisributionChannel]				VARCHAR(255)		NULL
 	, [RegionCD]						VARCHAR(255)		NULL
 	, [UOM]								VARCHAR(255)		NULL
 	, [EdiProcessDTS]					DATE		NULL
+	, [EdiProcessDateKEY]				INT			NULL
 	, [EdiPostDTS]						DATE		NULL
+	, [EdiPostDateKEY]					INT			NULL
 	, [EdiOnHandQTY]					INT			NULL
 	, [EdiIntransitQTY]					INT			NULL
 	, [EdiOnOrderQty]					INT			NULL
@@ -39,12 +42,13 @@
 	, [ZQTY_DELIVERED]					INT			NULL
 	, [ZQTY_CANCELLED]					INT			NULL
 	, [TrackingNUM]						VARCHAR(255)	NULL
-	, [REQ_SEGMENT]						VARCHAR(255)	NULL
-	, [SEASON]							VARCHAR(255)	NULL
-	, [SEASON_YEAR]				VARCHAR(255)	NULL
+	, [RequestSegmentCD]						VARCHAR(255)	NULL
+	, [Season]							VARCHAR(255)	NULL
+	, [SeasonYear]				VARCHAR(255)	NULL
 	, [ReasonCD]				VARCHAR(255)			NULL
-	, [ORG_ORD_QTY]				INT			NULL
-	, [ORG_ORD_DAY]				INT			NULL
-	, [SapOrder]								INT			NULL
+	, [OrderQuantityAMT]			INT			NULL
+	, [OrderDTS]				DATE			NULL
+	, [OrderDateKEY]			INT			NULL
+	, [SapOrder]				INT			NULL
 	, [EdiOrder]				INT			NULL
 )

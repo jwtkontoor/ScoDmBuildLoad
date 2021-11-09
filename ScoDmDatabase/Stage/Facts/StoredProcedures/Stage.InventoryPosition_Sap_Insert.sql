@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [Stage].[InventoryPositionSap_Insert]
+﻿ALTER PROCEDURE [Stage].[InventoryPositionSap_Insert] 
 
 	@BatchKEY INT
 
@@ -27,23 +27,26 @@ WITH CurrInventoryPosition AS
       ,[SORDER]                 AS SalesOrderNUM
       ,[SORDER_ITEM]            AS SaledOrderItemNUM
       ,[SORDER_SCHEDLINE]       AS SaledOrderItemLineNUM
-      ,[KEYACCOUNT]				AS [KEY_ACCOUNT]
+      ,[KEYACCOUNT]		                                        AS [KeyAccountCD]
       ,[MATNR]                  AS MaterialID
       ,[PLANT]                  AS PlantId
       ,[SOLDTO]                 AS SoldToCustomerId
       ,[SHIPTO]                 AS ShipToCustomerId
-      ,[MARKFOR]                AS MarkFor
-      ,[CALDAY]
+      ,[MARKFOR]                AS MarkForCD
+	  ,[CALDAY]					AS [CalendarDTS]
+      ,ISNULL(FORMAT(CAST ([CALDAY] AS DATE), 'yyyyMMdd'), -1) 					AS [CalendarDateKEY]
       ,[DISTCHANNEL]            AS DisributionChannel
       ,[REGION]                 AS RegionCD
       ,[UOM]
-      ,NULL						AS [EDI852_PROCESS_DTE]		
-      ,NULL						AS [EDI852_POST_DTE] 
-      , NULL AS [EDI852_OH_QTY]
-      , NULL AS [EDI852_INTRANSIT_QTY]
-      , NULL AS [EDI852_OO_QTY]
-      , NULL AS [EDI852_RCPT_QTY]
-      , NULL AS [EDI852_SLS_QTY]
+      ,NULL						AS [EdiProcessDTS]	
+      ,-1						AS [EdiProcessDateKEY]			
+      ,NULL					AS [EdiPostDTS] 
+      ,-1					AS [EdiPostDateKEY] 
+      , NULL AS [EdiOnHandQTY]
+      , NULL AS [EdiIntransitQTY]
+      , NULL AS [EdiOnOrderQty]
+      , NULL AS [EdiReceiptQTY]
+      , NULL AS [EdiSalesQTY]
       , NULL AS [EDI852_ADJ_INV_QTY]
       , NULL AS [EDI852_RTN_QTY]
       , NULL AS [SAP_OPEN_ORDER_QTY]
@@ -60,13 +63,14 @@ WITH CurrInventoryPosition AS
       ,[ZQTY_CONFIRMED]
       ,[ZQTY_DELIVERED]
       ,[ZQTY_CANCELLED]
-      ,[TRACKING_NUM]
+      ,[TRACKING_NUM]				AS [TrackingNUM]
       ,[REQ_SEGMENT]
       ,[SEASON]
       ,[SEASON_YEAR]
-      ,[REASON]
-      ,[ORG_ORD_QTY]
-      ,[ORG_ORD_DAY]
+      ,[REASON]						AS [ReasonCD]
+      ,[ORG_ORD_QTY]				AS [OrderQuantityAMT]
+      ,[ORG_ORD_DAY]				AS [OrderDTS] 
+      ,ISNULL(FORMAT(CAST ([ORG_ORD_DAY] AS DATE), 'yyyyMMdd'), -1) 									AS [OrderDateKEY]
       ,1                        AS SapOrder
       ,0                        AS EdiOrder
   FROM [DB_WW_LOGILITY_DEV].[dbo].[SAP_TD_SALESORDERS]
@@ -80,18 +84,21 @@ WITH CurrInventoryPosition AS
 	, NULL													AS SalesOrderNUM
 	, NULL													AS SaledOrderItemNUM
 	, NULL													AS SaledOrderItemLineNUM 
-      ,[KEY_ACCOUNT]
+      ,[KEY_ACCOUNT]                                          AS [KeyAccountCD]
       ,[MATNR]												AS MaterialId 
 	  , NULL												AS PlantId 
-      , [CUSTOMER_ID]               AS SoldToCustomerId
-      , [CUSTOMER_ID]                  AS ShipToCustomerId
-      ,[MARKFOR]
-      ,[CALDAY] 
-	  , NULL				 AS DisributionChannel
-      ,NULL                 AS RegionCD
-      ,NULL AS [UOM]
-      ,[EDI852_PROCESS_DTE]
-      ,[EDI852_POST_DTE]
+      , [CUSTOMER_ID]										AS SoldToCustomerId
+      , [CUSTOMER_ID]										AS ShipToCustomerId
+      ,[MARKFOR]											AS [MarkForCD]
+      ,[CALDAY]												AS [CalendarDTS]
+      ,ISNULL(FORMAT(CAST ([CALDAY]  AS DATE), 'yyyyMMdd'), -1) 											AS [CalendarDateKEY]
+	  , NULL												AS DisributionChannel
+      ,NULL													AS RegionCD
+      ,NULL													AS [UOM]
+      ,[EDI852_PROCESS_DTE] 					AS [EdiProcessDTS]
+      ,ISNULL(FORMAT(CAST ([EDI852_PROCESS_DTE] AS DATE), 'yyyyMMdd'), -1) 					AS [EdiProcessDateKEY]
+      , [EDI852_POST_DTE]  					AS [EdiPostDTS]
+      ,ISNULL(FORMAT(CAST ([EDI852_POST_DTE] AS DATE), 'yyyyMMdd'), -1) 					AS [EdiPostDateKEY]  
       ,[EDI852_OH_QTY]
       ,[EDI852_INTRANSIT_QTY]
       ,[EDI852_OO_QTY]
@@ -118,8 +125,9 @@ WITH CurrInventoryPosition AS
       , NULL AS [SEASON]
       , NULL AS [SEASON_YEAR]
       , NULL AS [REASON]
-      , NULL AS [ORG_ORD_QTY]
-      , NULL AS [ORG_ORD_DAY]
+      , NULL AS [OrderQuantityAMT]
+	  , NULL AS [OrderDTS]
+	  , -1   AS [OrderDateKEY]
       ,0                        AS SapOrder
       ,1                        AS EdiOrder
   FROM [dbo].[SAP_EDI852_PI_DATA]  
@@ -167,12 +175,13 @@ INSERT INTO Stage.InventoryPosition (
     , [ZQTY_DELIVERED]					
     , [ZQTY_CANCELLED]					
     , [TrackingNUM]						
-    , [REQ_SEGMENT]						
-    , [SEASON]							
-    , [SEASON_YEAR]				
+    , [RequestSegmentCD]						
+    , [Season]							
+    , [SeasonYear]				
     , [ReasonCD]				
-    , [ORG_ORD_QTY]					
-    , [ORG_ORD_DAY]				
+	, [OrderQuantityAMT]
+    , [OrderDTS]	
+    , [OrderDateKEY]			
     , [SapOrder]						
     , [EdiOrder]			
     )
@@ -221,8 +230,9 @@ SELECT
     , [SEASON]							
     , [SEASON_YEAR]				
     , [ReasonCD]				
-    , [ORG_ORD_QTY]					
-    , [ORG_ORD_DAY]				
+	, [OrderQuantityAMT]
+    , [OrderDTS]	
+    , [OrderDateKEY]
     , [SapOrder]						
     , [EdiOrder]		
 
