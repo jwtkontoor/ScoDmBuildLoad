@@ -1,1 +1,2 @@
 ﻿CREATE SCHEMA [Work]
+AUTHORIZATION dbo;

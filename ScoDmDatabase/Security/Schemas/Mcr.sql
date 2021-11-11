@@ -1,1 +1,2 @@
 ﻿CREATE SCHEMA [Mcr]
+AUTHORIZATION dbo;
