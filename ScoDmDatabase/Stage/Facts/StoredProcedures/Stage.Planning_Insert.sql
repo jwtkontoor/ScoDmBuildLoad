@@ -22,7 +22,7 @@ BEGIN TRY
 WITH SapPlanning AS 
 (
   SELECT 
-    1						AS [ShipmentId]
+    1						AS [PlanningId]
   --FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED]
 )
 	

@@ -17,50 +17,50 @@ AS
 
 BEGIN TRY
 	
-	TRUNCATE TABLE Stage.Shipment; 
+--	TRUNCATE TABLE Stage.Shipment; 
 
-WITH SapShipments AS 
-(
-  SELECT 
-        [ORDERTYPE] AS OrderTypeCD
-      ,[SORDER] AS SalesOrderNUM
-      ,[SORDER_ITEM] AS SaledOrderItemNUM
-      ,[SORDER_SCHEDLINE] 
-      ,[MATNR] AS MaterialID
-      ,[PLANT] AS PlantId
-      ,[SOLDTO] AS SoldToCustomerId
-      ,[SHIPTO] AS ShipToCustomerId
-      ,[MARKFOR] AS MarkFor
-      ,[DISTCHANNEL] AS DisributionChannel
-      ,[REGION]
-      ,[FISCVRNT_MTH]
-      ,[FISCMONTH]
-      ,[CALDAY]
-      ,[UOM]
-      ,[ZQTY_OPEN]
-      ,[ZQTY_CONFIRMED]
-      ,[ZQTY_DELIVERED]
-      ,[ZQTY_CANCELLED]
-      ,[KEYACCOUNT]
-      ,[TRACKING_NUM]
-      ,[REQ_SEGMENT]
-      ,[SEASON]
-      ,[SEASON_YEAR]
-      ,[REASON]
-      ,[ORG_ORD_QTY]
-      ,[ORG_ORD_DAY]
-  FROM [DB_WW_LOGILITY_DEV].[dbo].[SAP_TD_SALESORDERS]
-  --FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED]
-)
+--WITH SapShipments AS 
+--(
+--  SELECT 
+--        [ORDERTYPE] AS OrderTypeCD
+--      ,[SORDER] AS SalesOrderNUM
+--      ,[SORDER_ITEM] AS SaledOrderItemNUM
+--      ,[SORDER_SCHEDLINE] 
+--      ,[MATNR] AS MaterialID
+--      ,[PLANT] AS PlantId
+--      ,[SOLDTO] AS SoldToCustomerId
+--      ,[SHIPTO] AS ShipToCustomerId
+--      ,[MARKFOR] AS MarkFor
+--      ,[DISTCHANNEL] AS DisributionChannel
+--      ,[REGION]
+--      ,[FISCVRNT_MTH]
+--      ,[FISCMONTH]
+--      ,[CALDAY]
+--      ,[UOM]
+--      ,[ZQTY_OPEN]
+--      ,[ZQTY_CONFIRMED]
+--      ,[ZQTY_DELIVERED]
+--      ,[ZQTY_CANCELLED]
+--      ,[KEYACCOUNT]
+--      ,[TRACKING_NUM]
+--      ,[REQ_SEGMENT]
+--      ,[SEASON]
+--      ,[SEASON_YEAR]
+--      ,[REASON]
+--      ,[ORG_ORD_QTY]
+--      ,[ORG_ORD_DAY]
+--  FROM [DB_WW_LOGILITY_DEV].[dbo].[SAP_TD_SALESORDERS]
+--  --FROM [dbo].[LOG_RO_RETAILSITE_NONOWNED]
+--)
 	
-INSERT INTO Stage.Shipment ( 
+--INSERT INTO Stage.Shipment ( 
 
-    [ShipmentId]                  
+--    [ShipmentId]                  
 
-)
-SELECT 
-    a.[ShipmentId]
-FROM SapShipments a ;
+--)
+--SELECT 
+--    a.[ShipmentId]
+--FROM SapShipments a ;
 
 --=================================================================================================
 

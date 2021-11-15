@@ -10,7 +10,7 @@ DECLARE @EndDate DATE
 -- want our reports to cover (this should also take
 -- into account any future reporting needs)
 SET @StartDate = '01/01/2010'
-SET @EndDate = '12/31/2299' 
+SET @EndDate = '12/31/2099' 
 
 -- using a while loop increment from the start date 
 -- to the end date
@@ -22,7 +22,7 @@ WHILE @LoopDate <= @EndDate
 BEGIN
  -- add a record into the date dimension table for this date
  INSERT INTO Dim.Calendar VALUES (
-	CAST ( FORMAT ( @LoopDate, 'yyyymmdd' ) AS INT	)		--[DATEKEY]	
+	CAST ( FORMAT ( @LoopDate, 'yyyyMMdd' ) AS INT	)		--[DATEKEY]	
 	, CAST ( @LoopDate AS DATETIME )			--[CalendarDateTimeDTS]		       
 	, CAST ( @LoopDate AS DATE )				--[CalendarDTS]						       
 	, FORMAT (@LoopDate, 'D')					--[CalendarDateDESC]				   

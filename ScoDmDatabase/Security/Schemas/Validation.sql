@@ -1,2 +1,1 @@
-﻿CREATE SCHEMA [Validation]
-AUTHORIZATION dbo;
+﻿CREATE SCHEMA [Validation];

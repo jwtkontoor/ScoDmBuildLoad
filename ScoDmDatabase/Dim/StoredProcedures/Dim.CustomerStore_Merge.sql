@@ -83,7 +83,7 @@ BEGIN TRY
 
 		INSERT (
 
-			  [CustomerStoreKEY]
+			  [CustomerStoreKEY]		
 			, [KeyAccountCD]        	
 			, [PlantCategoryCD]     	
 			, [SiteDESC]            	
@@ -94,32 +94,29 @@ BEGIN TRY
 			, [OpenedOnDTS]         	
 			, [ClosedOnDTS]         	
 			, [SellAreaCD]            	
-			, [SellAreaUnit]        	
-			, DmBatchKEY			
-			, DmBeginDTS					
-			, DmActiveFLG					
+			, [SellAreaUnit]      
+			, DmBeginDTS												
+			, DmEndDTS						
 			, DmBatchKEY	
 			, DmCreateDTS
 
 		) VALUES (
 		
-			  src.[CustomerStoreKEY]
-			, src.[KeyAccountCD]        
-			, src.[PlantCategoryCD]     
-			, src.[SiteDESC]            
-			, src.[Region]              
-			, src.[Country]             
-			, src.[City]                
-			, src.[District]            
-			, src.[OpenedOnDTS]         
-			, src.[ClosedOnDTS]         
-			, src.[SellAreaCD]            
-			, src.[SellAreaUnit]        
-			, src.DmBatchKEY	
-			, src.DmBeginDTS
-			, src.DmEndDTS
-			, src.DmActiveFLG
-			, src.DmBatchKEY	
+			  src.[CustomerStoreKEY]									
+			, src.[KeyAccountCD]        								
+			, src.[PlantCategoryCD]     								
+			, src.[SiteDESC]            								
+			, src.[Region]              								
+			, src.[Country]             								
+			, src.[City]                								
+			, src.[District]            								
+			, src.[OpenedOnDTS]         								
+			, src.[ClosedOnDTS]         								
+			, src.[SellAreaCD]            								
+			, src.[SellAreaUnit]    									
+			, src.DmBeginDTS												
+			, src.DmEndDTS												
+			, src.DmBatchKEY											
 			, src.DmCreateDTS
 		);
 
