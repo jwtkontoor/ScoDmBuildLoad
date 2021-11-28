@@ -153,6 +153,8 @@
     <Build Include="Stage\Facts\StoredProcedures\Stage.Planning_Insert.sql" />
     <Build Include="Stage\Facts\StoredProcedures\Stage.InventoryPosition_Edi_Merge.sql" />
     <Build Include="Stage\Facts\StoredProcedures\Stage.InventoryPosition_LeadTime_Merge.sql" />
+    <Build Include="Stage\Facts\Tables\Stage.EdiInventoryUpdates.sql" />
+    <Build Include="Stage\Facts\StoredProcedures\Stage.EdiInventory_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ScoDmDatabase.refactorlog" />

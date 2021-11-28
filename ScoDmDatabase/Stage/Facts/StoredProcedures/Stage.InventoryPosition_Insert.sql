@@ -22,34 +22,34 @@ BEGIN TRY
 WITH CurrInventoryPosition AS 
 (
       SELECT 
-    [SORDER] + '|' + [SORDER_ITEM] + '|' + [SORDER_SCHEDLINE] AS InventoryPositionId
-    ,[ORDERTYPE]                AS OrderTypeCD
-      ,[SORDER]                 AS SalesOrderNUM
-      ,[SORDER_ITEM]            AS SaledOrderItemNUM
-      ,[SORDER_SCHEDLINE]       AS SaledOrderItemLineNUM
-      ,[KEYACCOUNT]		                                        AS [KeyAccountCD]
-      ,[MATNR]                  AS MaterialID
-      ,[PLANT]                  AS PlantId
-      ,[SOLDTO]                 AS SoldToCustomerId
-      ,[SHIPTO]                 AS ShipToCustomerId
-      ,[MARKFOR]                AS MarkForCD
-	  ,[CALDAY]					AS [CalendarDTS]
-      ,ISNULL(FORMAT(CAST ([CALDAY] AS DATE), 'yyyyMMdd'), -1) 					AS [CalendarDateKEY]
-      ,[DISTCHANNEL]            AS DisributionChannel
-      ,[REGION]                 AS RegionCD
-      ,[UOM]
-      ,[ZQTY_OPEN]
-      ,[ZQTY_CONFIRMED]
-      ,[ZQTY_DELIVERED]
-      ,[ZQTY_CANCELLED]
-      ,[TRACKING_NUM]				AS [TrackingNUM]
-      ,[REQ_SEGMENT]
-      ,[SEASON]
-      ,[SEASON_YEAR]
-      ,[REASON]						AS [ReasonCD]
-      ,[ORG_ORD_QTY]				AS [OrderQuantityAMT]
-      ,[ORG_ORD_DAY]				AS [OrderDTS] 
-      ,ISNULL(FORMAT(CAST ([ORG_ORD_DAY] AS DATE), 'yyyyMMdd'), -1) 								AS [OrderDateKEY]
+    [SORDER] + '|' + [SORDER_ITEM] + '|' + [SORDER_SCHEDLINE]               AS [InventoryPositionId]
+    ,[ORDERTYPE]                                                            AS [OrderTypeCD]
+      ,[SORDER]                                                             AS [SalesOrderNUM]
+      ,[SORDER_ITEM]                                                        AS [SaledOrderItemNUM]
+      ,[SORDER_SCHEDLINE]                                                   AS [SaledOrderItemLineNUM]
+      ,[KEYACCOUNT]		                                                    AS [KeyAccountCD]
+      ,[MATNR]                                                              AS [MaterialID]
+      ,[PLANT]                                                              AS [PlantId]
+      ,[SOLDTO]                                                             AS [SoldToCustomerId]
+      ,[SHIPTO]                                                             AS [ShipToCustomerId]
+      ,[MARKFOR]                                                            AS [MarkForCD]
+	  ,[CALDAY]					                                            AS [CalendarDTS]
+      ,ISNULL(FORMAT(CAST ([CALDAY] AS DATE), 'yyyyMMdd'), -1) 				AS [CalendarDateKEY]
+      ,[DISTCHANNEL]                                                        AS [DisributionChannel]
+      ,[REGION]                                                             AS [RegionCD]
+      ,[UOM]                                                                AS [UnitOfMeasure]
+      ,[ZQTY_OPEN]                                                          AS [OpenQTY]        
+      ,[ZQTY_CONFIRMED]                                                     AS [ConfirmedQTY]
+      ,[ZQTY_DELIVERED]                                                     AS [DeliveredQTY]
+      ,[ZQTY_CANCELLED]                                                     AS [CancelledQTY]
+      ,[TRACKING_NUM]				                                        AS [TrackingNUM]
+      ,[REQ_SEGMENT]                                                        AS [Segment]
+      ,[SEASON]                                                             AS [Season]
+      ,[SEASON_YEAR]                                                        AS [SeasonYear]    
+      ,[REASON]						                                        AS [ReasonCD]
+      ,[ORG_ORD_QTY]				                                        AS [OrderQuantityAMT]
+      ,[ORG_ORD_DAY]				                                        AS [OrderDTS] 
+      ,ISNULL(FORMAT(CAST ([ORG_ORD_DAY] AS DATE), 'yyyyMMdd'), -1) 		AS [OrderDateKEY]
   FROM [DB_WW_LOGILITY_DEV].[dbo].[SAP_TD_SALESORDERS]
 
 

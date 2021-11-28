@@ -23,171 +23,111 @@ DECLARE @LastEdiLoadedDate		AS INT;
 SELECT DISTINCT @LastEdiLoadedDate = [EdiFileSentDTS] FROM Fact.InventoryPosition;
 --20210910 
 
-WITH EdiDetail AS 
-(
-	SELECT  
-		[MANDT]													AS [Material]
-      ,[UNIQUEID]												AS [HeaderUniqueID]
-	  ,[MANDT] + '|' + [UNIQUEID] + '|' + [MATERIALNO]			AS [EdiDetailId]
-      ,[MATERIALNO]												AS [MaterialNUM]
-      ,[ACTIVITYCODE]											AS [ActivityCD]
-      ,[LEGACY_MATERIAL_NO]										AS [LegacyMaterialNUM]
-      ,[EAN_UPC]												AS [UniversalProductCD]
-      ,[UNITOFMEASURE]											AS [UnitOfMeasure]
-      ,[ITEMDATE]												AS [ItemDTS]
-      ,[ITEMNO]													AS [ItemNUM]
-      ,[ITEMQUANTITY]											AS [QuantityAMT]
---	  , CASE 
-		--WHEN [ACTIVITYCODE] = 'DG' THEN [ITEMQUANTITY]	AS [DamagedQTY]
---DS	Days Supply
---FV	Forecast Variance
---HL	Quantity on Hold
---QA	Current Inventory Quantity Available
---QE	Ending Balance Quantity
---QI	[InTransitQTY]
---QO	[OutOfStockQTY]
---QP	[OnOrderQTY]
---QR	Quantity received
---QS	[SoldQTY]
---QT	Adjustment to inventory quantity
---QU	Quantity returned by consumer
---SS	Sales
---ST	Sell Thru Percentage
---TS	Total Sales Quantity
---WS	Weeks Supply
-      ,[ITEMPRICE]												AS [ItemPrice]
-      ,[ITEMQUALF]												AS [ItemQualifierCD]
-      ,[IDOCOBJECTNO]											AS [ObjectNUM]
-      ,[KATR7]													AS [Katr7]
-      ,[IDOC_DATE]												AS [DocumentDTS]
-	  ,NULLIF([LEGACY_STORE_NO],'') 							AS [LegacyStoreNUM]
-	  ,NULLIF([INTERNAL_NUMBER], '')							AS [InternalNUM] 
-      ,[QUALF_REF_DOC]											AS [RefDoc]
-      ,[DOC_NO]													AS [DocNUM]
-      ,[POSNR]													AS [PosNUM]
-      ,[PATNER_ID]												AS [PartnerID]
-      ,[SOLD_T_PARTY]											AS [SoldTo]
-      ,[LEGACY_SOLDTO]											AS [LegacySoldTo]
-      ,[JURISDIC]												AS [JurisdictionCD]
-      ,[NAME_TEXT]												AS [NameText]
-      ,[ZZ000FILESENTDATE]										AS [EdiFileSentDTS]
-      ,[ZZ001BEGINNINGDATE]										AS [EdiFileStartDTS]
-      ,[ZZ002ENDDATE]											AS [EdiFileEndDTS]
-  FROM [LOGILITY_SLT_PPD].[sapee1et1].[ZOTC_T_RFSM_ITEM] i 
-  INNER JOIN [LOGILITY_SLT_PPD].[sapee1et1].[ZOTC_T_RFSM_HDR] h 
-	ON i.[MANDT] = h.[MANDT] AND i.[UNIQUEID] = h.[UNIQUEID]	
-  WHERE 1 = 1 
-  AND [ITEMQUANTITY] > 0 
-  AND [ITEMDATE] = 20210405
-),
+WITH EdiDetailPivot AS (
+	SELECT 
+		  [MANDT]		AS [Man]	
+		, [UNIQUEID]	AS [UniqueID]
+		, [MATERIALNO]	AS [MaterialNUM]	
+		, [DG]			AS [DamagedQTY]
+		, [DS]			AS [DaysSupplyQTY]
+		, [FV]			AS [ForecastVarianceQTY]
+		, [HL]			AS [OnHoldQTY]
+		, [QA]			AS [AvailableQTY]
+		, [QE]			AS [EndingQTY]
+		, [QI]			AS [InTransitQTY]
+		, [QO]			AS [OutOfStockQTY]
+		, [QP]			AS [OnOrderQTY]
+		, [QR]			AS [ReceivedQTY]
+		, [QS]			AS [SoldQTY]
+		, [QT]			AS [InventoryAdjustmentQTY]
+		, [QU]			AS [ReturnedQTY]
+		, [SS]			AS [SalesQTY]
+		, [ST]			AS [SellThruPCT]
+		, [TS]			AS [TotalSalesQTY]
+		, [WS] 			AS [WeeksSupplyNUM]
+	FROM   
+	(
+		SELECT TOP 1000
+			  [MANDT]		
+			, [UNIQUEID]	
+			, [MATERIALNO]	
+			, [ACTIVITYCODE] 
+			, [ITEMQUANTITY]
+		FROM [LOGILITY_SLT_PPD].[sapee1et1].[ZOTC_T_RFSM_ITEM]
+		WHERE 1 = 1 
+		AND [ITEMQUANTITY] > 0 
+		AND [ITEMDATE] = 20210405
+	 ) p  
+	PIVOT  
+	(  
+		MAX([ITEMQUANTITY])	  
+		FOR [ACTIVITYCODE] IN  
+		( 
+			  [DG]
+			, [DS]
+			, [FV]
+			, [HL]
+			, [QA]
+			, [QE]
+			, [QI]
+			, [QO]
+			, [QP]
+			, [QR]
+			, [QS]
+			, [QT]
+			, [QU]
+			, [SS]
+			, [ST]
+			, [TS]
+			, [WS] 
 
-EdiDetailPivot AS (
-SELECT 
-	[MANDT]		
-  ,[UNIQUEID]	
-  ,[MATERIALNO]	
-  , [DG]
-, [DS]
-, [FV]
-, [HL]
-, [QA]
-, [QE]
-, [QI]
-, [QO]
-, [QP]
-, [QR]
-, [QS]
-, [QT]
-, [QU]
-, [SS]
-, [ST]
-, [TS]
-, [WS] 
-FROM   
-(SELECT TOP 1000
-	[MANDT]		
-  ,[UNIQUEID]	
-  ,[MATERIALNO]	
-  , [ACTIVITYCODE] 
-  , [ITEMQUANTITY]
- FROM [LOGILITY_SLT_PPD].[sapee1et1].[ZOTC_T_RFSM_ITEM]
-  WHERE 1 = 1 
-  AND [ITEMQUANTITY] > 0 
-  --AND [ACTIVITYCODE] NOT IN ('QA')
-  AND [ITEMDATE] = 20210405
- ) p  
-PIVOT  
-(  
-MAX([ITEMQUANTITY])	  
-FOR [ACTIVITYCODE] IN  
-( 
---SELECT ACTVT_CD FROM [LOGILITY_SLT_PPD].[sapee1et1].[ZOTC_T_RFSM_ACTV] 
-[DG]
-, [DS]
-, [FV]
-, [HL]
-, [QA]
-, [QE]
-, [QI]
-, [QO]
-, [QP]
-, [QR]
-, [QS]
-, [QT]
-, [QU]
-, [SS]
-, [ST]
-, [TS]
-, [WS] 
-
-)  
-) AS pvt  
-
+		)  
+	) AS pvt  
 
 ), 
 
 EdiInventoryPosition AS 
 (
 	SELECT 
-		[MANDT]		
-  ,[UNIQUEID]	
-  ,[MATERIALNO]	
-  , [DG]
-, [DS]
-, [FV]
-, [HL]
-, [QA]
-, [QE]
-, [QI]
-, [QO]
-, [QP]
-, [QR]
-, [QS]
-, [QT]
-, [QU]
-, [SS]
-, [ST]
-, [TS]
-, [WS] 
-      ,[KATR7]													AS [Katr7]
-      ,[IDOC_DATE]												AS [DocumentDTS]
-	  ,NULLIF([LEGACY_STORE_NO],'') 							AS [LegacyStoreNUM]
-	  ,NULLIF([INTERNAL_NUMBER], '')							AS [InternalNUM] 
-      ,[QUALF_REF_DOC]											AS [RefDoc]
-      ,[DOC_NO]													AS [DocNUM]
-      ,[POSNR]													AS [PosNUM]
-      ,[PATNER_ID]												AS [PartnerID]
-      ,[SOLD_T_PARTY]											AS [SoldTo]
-      ,[LEGACY_SOLDTO]											AS [LegacySoldTo]
-      ,[JURISDIC]												AS [JurisdictionCD]
-      ,[NAME_TEXT]												AS [NameText]
-      ,[ZZ000FILESENTDATE]										AS [EdiFileSentDTS]
-      ,[ZZ001BEGINNINGDATE]										AS [EdiFileStartDTS]
-      ,[ZZ002ENDDATE]											AS [EdiFileEndDTS]
+		  [Man]	
+		, [UniqueID]
+		, [MaterialNUM]	
+		, [DamagedQTY]
+		, [DaysSupplyQTY]
+		, [ForecastVarianceQTY]
+		, [OnHoldQTY]
+		, [AvailableQTY]
+		, [EndingQTY]
+		, [InTransitQTY]
+		, [OutOfStockQTY]
+		, [OnOrderQTY]
+		, [ReceivedQTY]
+		, [SoldQTY]
+		, [InventoryAdjustmentQTY]
+		, [ReturnedQTY]
+		, [SalesQTY]
+		, [SellThruPCT]
+		, [TotalSalesQTY]
+		, [WeeksSupplyNUM]
+		, [KATR7]												AS [Katr7]
+		, [IDOC_DATE]											AS [DocumentDTS]
+		, NULLIF([LEGACY_STORE_NO],'') 							AS [LegacyStoreNUM]
+		, NULLIF([INTERNAL_NUMBER], '')							AS [InternalNUM] 
+		, [QUALF_REF_DOC]										AS [RefDoc]
+		, [DOC_NO]												AS [DocNUM]
+		, [POSNR]												AS [PosNUM]
+		, [PATNER_ID]											AS [PartnerID]
+		, [SOLD_T_PARTY]										AS [SoldTo]
+		, [LEGACY_SOLDTO]										AS [LegacySoldTo]
+		, [JURISDIC]											AS [JurisdictionCD]
+		, [NAME_TEXT]											AS [NameText]
+		, [ZZ000FILESENTDATE]									AS [EdiFileSentDTS]
+		, [ZZ001BEGINNINGDATE]									AS [EdiFileStartDTS]
+		, [ZZ002ENDDATE]										AS [EdiFileEndDTS]
 
 	FROM EdiDetailPivot i 
-  INNER JOIN [LOGILITY_SLT_PPD].[sapee1et1].[ZOTC_T_RFSM_HDR] h 
-	ON i.[MANDT] = h.[MANDT] AND i.[UNIQUEID] = h.[UNIQUEID]
+	INNER JOIN [LOGILITY_SLT_PPD].[sapee1et1].[ZOTC_T_RFSM_HDR] h 
+		ON i.[MANDT] = h.[MANDT] AND i.[UNIQUEID] = h.[UNIQUEID]
 )
 	
 MERGE INTO Stage.InventoryPosition tgt 
