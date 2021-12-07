@@ -1,33 +1,7 @@
 ﻿CREATE TABLE [Stage].[EdiInventoryUpdates]
 (
-	  [InventoryPositionId] 	VARCHAR(255)		NULL
-	, [OrderTypeCD]				VARCHAR(255)		NULL
-	, [SalesOrderNUM]			VARCHAR(255)		NULL
-	, [SaledOrderItemNUM] 		VARCHAR(255)		NULL
-	, [SaledOrderItemLineNUM] 	VARCHAR(255)		NULL
-	, [KeyAccountCD] 			VARCHAR(255) 		NULL
-	, [MaterialID] 				VARCHAR(255) 		NULL
-	, [PlantID] 				VARCHAR(255) 		NULL
-	, [SoldToCustomerID] 		VARCHAR(255) 		NULL
-	, [ShipToCustomerID] 		VARCHAR(255) 		NULL
-	, [MarkForCD] 				VARCHAR(255) 		NULL
-	, [CalendarDTS]				DATE				NULL
-	, [CalendarDateKEY]			INT					NULL
-	, [DisributionChannel] 		VARCHAR(255) 		NULL
-	, [RegionCD] 				VARCHAR(255) 		NULL
-	, [OpenQTY]					INT					NULL 
-	, [ConfirmedQTY]			INT					NULL
-	, [DeliveredQTY]			INT					NULL
-	, [CancelledQTY]			INT					NULL
-	, [TrackingNUM]				VARCHAR(255) 		NULL
-	, [Segment]					VARCHAR(255) 		NULL
-	, [Season] 					VARCHAR(255) 		NULL
-	, [SeasonYear]    			VARCHAR(255) 		NULL 
-	, [ReasonCD]				VARCHAR(255) 		NULL
-	, [OrderQuantityAMT]		INT					NULL
-	, [OrderDTS]				DATE				NULL
-	, [OrderDateKEY] 			INT					NULL
-	, [Material]				VARCHAR(255)		NOT NULL	
+	  [MaterialLineNUM]			VARCHAR(255)		NOT NULL		
+	, [UniqueID]				VARCHAR(255)		NULL
 	, [HeaderUniqueID]			VARCHAR(255)		NULL
 	, [EdiDetailId]				VARCHAR(255)		NULL
 	, [MaterialNUM]				VARCHAR(255)		NULL

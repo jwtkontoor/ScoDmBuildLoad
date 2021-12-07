@@ -20,7 +20,7 @@ BEGIN TRY
 DECLARE @LastEdiSentDate		AS INT;
 DECLARE @LastEdiLoadedDate		AS INT; 
 
-SELECT DISTINCT @LastEdiLoadedDate = [EdiFileSentDTS] FROM Fact.InventoryPosition;
+--SELECT DISTINCT @LastEdiLoadedDate = [EdiFileSentDTS] FROM Fact.InventoryPosition;
 --20210910 
 
 TRUNCATE TABLE [Stage].[EdiInventoryUpdates];
@@ -29,6 +29,7 @@ WITH EdiDetailPivot AS (
 	SELECT 
 		  [MANDT]		AS [Man]	
 		, [UNIQUEID]	AS [UniqueID]
+		, CONCAT_WS ( '|', [MANDT], [UNIQUEID])	AS [HeaderUniqueID]
 		, [MATERIALNO]	AS [MaterialNUM]	
 		, CONCAT_WS('|', [MANDT], [UNIQUEID], [MATERIALNO] ) AS [EdiDetailId]
 		, [DG]			AS [DamagedQTY]
@@ -93,7 +94,8 @@ EdiInventoryPosition AS
 (
 	SELECT 
 		  [Man]	
-		, [UniqueID]
+		, i.[UniqueID]
+		, [HeaderUniqueID]
 		, [MaterialNUM]	
 		, [EdiDetailId]
 		, [DamagedQTY]
@@ -131,13 +133,14 @@ EdiInventoryPosition AS
 
 	FROM EdiDetailPivot i 
 	INNER JOIN [LOGILITY_SLT_PPD].[sapee1et1].[ZOTC_T_RFSM_HDR] h 
-		ON i.[MANDT] = h.[MANDT] AND i.[UNIQUEID] = h.[UNIQUEID]
+		ON i.[MAN] = h.[MANDT] AND i.[UNIQUEID] = h.[UNIQUEID]
 )
 	
 INSERT INTO Stage.EdiInventoryUpdates
 ( 
-	  [Man]	
+	  [MaterialLineNUM]	
 	, [UniqueID]
+	, [HeaderUniqueID]
 	, [MaterialNUM]	
 	, [EdiDetailId]
 	, [DamagedQTY]
@@ -177,6 +180,7 @@ INSERT INTO Stage.EdiInventoryUpdates
 SELECT  
 	  [Man]	
 	, [UniqueID]
+	, [HeaderUniqueID]
 	, [MaterialNUM]	
 	, [EdiDetailId]
 	, [DamagedQTY]
